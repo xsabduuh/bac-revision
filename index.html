@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لائحة مراجعة البكالوريا</title>
+<link rel="manifest" href="/manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080c16;--card:#111827;--border:#1a2540;--text:#dde4f0;--muted:#5a6a8a;
+  --done:#10b981;--partial:#f59e0b;--phys:#38bdf8;--chem:#c084fc;--math:#fb7185;--svt:#34d399;
+  --orange:#f97316;--red:#ef4444;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;min-height:100vh;padding:0 0 60px;
+  background-image:radial-gradient(ellipse 60% 40% at 10% 5%,rgba(56,189,248,.05) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 90% 90%,rgba(192,132,252,.04) 0%,transparent 60%);}
+
+/* TABS */
+.tabs{display:flex;max-width:860px;margin:0 auto;border-bottom:1px solid var(–border);background:var(–card);position:sticky;top:0;z-index:10;}
+.tab{flex:1;padding:12px 4px;text-align:center;font-size:.75rem;font-weight:700;color:var(–muted);cursor:pointer;transition:all .2s;border-bottom:2px solid transparent;}
+.tab.active{color:var(–text);border-bottom-color:var(–orange);}
+.tab:hover{color:var(–text);}
+.page{display:none;padding:14px 12px;}.page.active{display:block;}
+
+header{text-align:center;padding:20px 16px 14px;}
+header h1{font-size:clamp(1.3rem,4vw,2rem);font-weight:900;letter-spacing:-.02em;background:linear-gradient(120deg,#dde4f0 40%,#5a6a8a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+header p{color:var(–muted);font-size:.77rem;margin-top:3px;}
+
+.total-wrap{max-width:860px;margin:0 auto 14px;background:var(–card);border:1px solid var(–border);border-radius:13px;padding:11px 16px;display:flex;align-items:center;gap:12px;}
+.total-label{font-size:.75rem;font-weight:700;color:var(–muted);white-space:nowrap;}
+.bar-track{flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:99px;transition:width .5s ease;background:linear-gradient(90deg,var(–phys),var(–chem),var(–math),var(–svt));}
+.total-pct{font-size:.9rem;font-weight:900;min-width:38px;text-align:left;}
+
+.overview{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-width:860px;margin:0 auto 12px;}
+@media(max-width:580px){.overview{grid-template-columns:repeat(2,1fr);}}
+.ov{background:var(–card);border:1px solid var(–border);border-radius:11px;padding:9px 6px 7px;text-align:center;position:relative;overflow:hidden;}
+.ov::after{content:’’;position:absolute;top:0;left:0;right:0;height:2px;}
+.ov.phys::after{background:var(–phys);}.ov.chem::after{background:var(–chem);}.ov.math::after{background:var(–math);}.ov.svt::after{background:var(–svt);}
+.ov .ico{font-size:1.1rem;margin-bottom:2px;}.ov .lbl{font-size:.62rem;color:var(–muted);margin-bottom:1px;}.ov .num{font-size:1.1rem;font-weight:900;}
+.ov.phys .num{color:var(–phys);}.ov.chem .num{color:var(–chem);}.ov.math .num{color:var(–math);}.ov.svt .num{color:var(–svt);}
+.ov .cnt{font-size:.6rem;color:var(–muted);margin-top:1px;}
+
+.legend{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:860px;margin:0 auto 10px;}
+.leg{display:flex;align-items:center;gap:4px;font-size:.68rem;color:var(–muted);}
+.ldot{width:8px;height:8px;border-radius:3px;}
+.ld-done{background:var(–done);}.ld-part{background:var(–partial);}.ld-todo{background:var(–border);border:1px solid var(–muted);}
+
+.block{max-width:860px;margin:0 auto 10px;background:var(–card);border:1px solid var(–border);border-radius:14px;overflow:hidden;}
+.block-head{display:flex;align-items:center;gap:9px;padding:10px 13px;border-bottom:1px solid var(–border);cursor:pointer;transition:background .15s;user-select:none;}
+.block-head:hover{background:rgba(255,255,255,.015);}
+.bico{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+.phys .bico{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);}
+.chem .bico{background:rgba(192,132,252,.1);border:1px solid rgba(192,132,252,.2);}
+.math .bico{background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.2);}
+.svt  .bico{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);}
+.btitle{flex:1;}.btitle .main{font-size:.87rem;font-weight:700;}.btitle .sub{font-size:.62rem;color:var(–muted);}
+.mini-bar{width:60px;height:4px;background:var(–border);border-radius:99px;overflow:hidden;flex-shrink:0;}
+.mini-fill{height:100%;border-radius:99px;transition:width .4s;}
+.phys .mini-fill{background:var(–phys);}.chem .mini-fill{background:var(–chem);}.math .mini-fill{background:var(–math);}.svt .mini-fill{background:var(–svt);}
+.mini-pct{font-size:.65rem;font-weight:800;min-width:26px;text-align:left;}
+.phys .mini-pct{color:var(–phys);}.chem .mini-pct{color:var(–chem);}.math .mini-pct{color:var(–math);}.svt .mini-pct{color:var(–svt);}
+.chv{font-size:.6rem;color:var(–muted);transition:transform .2s;flex-shrink:0;}.chv.open{transform:rotate(180deg);}
+.chap-wrap{padding:0 9px 4px;}
+.ch-t{font-size:.62rem;font-weight:800;color:var(–muted);text-transform:uppercase;letter-spacing:.1em;padding:9px 4px 3px;}
+.lesson{display:flex;align-items:center;gap:6px;padding:5px 7px;border-radius:8px;margin-bottom:2px;transition:background .15s;}
+.lesson:hover{background:rgba(255,255,255,.02);}
+.ltext{flex:1;}.lname{font-size:.78rem;}.lsub{font-size:.62rem;color:var(–muted);margin-top:1px;line-height:1.3;}
+.lesson.done .lname{color:var(–muted);text-decoration:line-through;text-decoration-color:rgba(90,106,138,.35);}
+.sbg{display:flex;gap:3px;}
+.sb{width:24px;height:24px;border-radius:6px;border:1.5px solid var(–border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:var(–muted);transition:all .15s;}
+.sb:hover{border-color:var(–muted);color:var(–text);}
+.sb.is-done{background:rgba(16,185,129,.15);border-color:var(–done);color:var(–done);}
+.sb.is-part{background:rgba(245,158,11,.15);border-color:var(–partial);color:var(–partial);}
+.note{background:transparent;border:none;outline:none;color:var(–muted);font-family:‘Cairo’,sans-serif;font-size:.65rem;width:65px;cursor:text;text-align:right;}
+.note::placeholder{color:rgba(90,106,138,.3);}.note:focus{color:var(–text);}
+@media(max-width:480px){.note{width:40px;}.mini-bar,.btitle .sub{display:none;}}
+
+/* ===== SCHEDULE ===== */
+.sched-header{text-align:center;padding:16px 16px 10px;}
+.sched-header h2{font-size:1.2rem;font-weight:900;}.sched-header p{font-size:.73rem;color:var(–muted);margin-top:2px;}
+.day-tabs{display:flex;gap:5px;max-width:860px;margin:0 auto 12px;overflow-x:auto;padding-bottom:3px;}
+.day-tabs::-webkit-scrollbar{height:2px;}.day-tabs::-webkit-scrollbar-thumb{background:var(–border);}
+.dtab{flex-shrink:0;padding:6px 11px;border-radius:99px;border:1.5px solid var(–border);background:transparent;color:var(–muted);font-family:‘Cairo’,sans-serif;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .2s;}
+.dtab.active{background:rgba(249,115,22,.15);border-color:var(–orange);color:var(–orange);}
+.dtab:hover{border-color:var(–muted);color:var(–text);}
+.sched-stats{max-width:860px;margin:0 auto 12px;display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
+.stat-card{background:var(–card);border:1px solid var(–border);border-radius:11px;padding:9px;text-align:center;}
+.stat-num{font-size:1.2rem;font-weight:900;}
+.stat-num.green{color:var(–done);}.stat-num.orange{color:var(–orange);}.stat-num.blue{color:var(–phys);}
+.stat-lbl{font-size:.62rem;color:var(–muted);margin-top:1px;}
+.sessions{max-width:860px;margin:0 auto;}
+.session-card{background:var(–card);border:1px solid var(–border);border-radius:12px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:10px;transition:all .2s;cursor:pointer;}
+.session-card.done-s{background:rgba(16,185,129,.06);border-color:rgba(16,185,129,.25);}
+.session-time{text-align:center;flex-shrink:0;min-width:66px;}
+.session-time .t{font-size:.75rem;font-weight:800;color:var(–orange);}
+.session-card.done-s .session-time .t{color:var(–done);}
+.session-time .dur{font-size:.6rem;color:var(–muted);margin-top:1px;}
+.session-info{flex:1;}.session-name{font-size:.84rem;font-weight:700;}.session-sub{font-size:.65rem;color:var(–muted);margin-top:1px;}
+.session-check{width:30px;height:30px;border-radius:99px;border:2px solid var(–border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(–muted);transition:all .2s;flex-shrink:0;}
+.session-card.done-s .session-check{background:rgba(16,185,129,.2);border-color:var(–done);color:var(–done);}
+.no-sessions{text-align:center;padding:30px 16px;color:var(–muted);font-size:.82rem;}
+.week-sum{max-width:860px;margin:12px auto 0;background:var(–card);border:1px solid var(–border);border-radius:12px;padding:12px 14px;}
+.week-sum h3{font-size:.78rem;font-weight:700;color:var(–muted);margin-bottom:8px;}
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.wday{text-align:center;}.wday-name{font-size:.58rem;color:var(–muted);margin-bottom:3px;}
+.wday-bar{height:36px;background:var(–border);border-radius:4px;overflow:hidden;position:relative;}
+.wday-fill{position:absolute;bottom:0;left:0;right:0;background:var(–orange);border-radius:4px;transition:height .4s;}
+.wday-fill.full{background:var(–done);}.wday-pct{font-size:.56rem;color:var(–muted);margin-top:2px;}
+
+/* ===== STATS ===== */
+.stats-header{text-align:center;padding:16px 16px 10px;}
+.stats-header h2{font-size:1.2rem;font-weight:900;}.stats-header p{font-size:.73rem;color:var(–muted);margin-top:2px;}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-width:860px;margin:0 auto 12px;}
+.big-stat{background:var(–card);border:1px solid var(–border);border-radius:13px;padding:14px;text-align:center;}
+.big-stat .n{font-size:2rem;font-weight:900;}.big-stat .l{font-size:.7rem;color:var(–muted);margin-top:2px;}
+.big-stat.g .n{color:var(–done);}.big-stat.o .n{color:var(–orange);}.big-stat.b .n{color:var(–phys);}.big-stat.p .n{color:var(–chem);}
+.chart-wrap{max-width:860px;margin:0 auto 12px;background:var(–card);border:1px solid var(–border);border-radius:13px;padding:14px;}
+.chart-title{font-size:.78rem;font-weight:700;color:var(–muted);margin-bottom:12px;}
+.bar-chart{display:flex;align-items:flex-end;gap:8px;height:100px;}
+.bc-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.bc-bar{width:100%;border-radius:5px 5px 0 0;transition:height .5s ease;min-height:4px;}
+.bc-label{font-size:.6rem;color:var(–muted);text-align:center;}
+.bc-val{font-size:.62rem;font-weight:700;text-align:center;}
+.subject-bars{max-width:860px;margin:0 auto 12px;background:var(–card);border:1px solid var(–border);border-radius:13px;padding:14px;}
+.subj-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.subj-row:last-child{margin-bottom:0;}
+.subj-name{font-size:.78rem;font-weight:700;min-width:80px;}
+.subj-bar-wrap{flex:1;height:8px;background:var(–border);border-radius:99px;overflow:hidden;}
+.subj-bar-fill{height:100%;border-radius:99px;transition:width .5s;}
+.subj-pct{font-size:.7rem;font-weight:800;min-width:34px;text-align:left;}
+
+/* ===== TODO ===== */
+.todo-header{text-align:center;padding:16px 16px 10px;}
+.todo-header h2{font-size:1.2rem;font-weight:900;}.todo-header p{font-size:.73rem;color:var(–muted);margin-top:2px;}
+.todo-day-tabs{display:flex;gap:5px;max-width:860px;margin:0 auto 12px;overflow-x:auto;padding-bottom:3px;}
+.todo-day-tabs::-webkit-scrollbar{height:2px;}
+.todo-add{max-width:860px;margin:0 auto 12px;display:flex;gap:8px;}
+.todo-input{flex:1;background:var(–card);border:1px solid var(–border);border-radius:10px;padding:10px 14px;color:var(–text);font-family:‘Cairo’,sans-serif;font-size:.82rem;outline:none;}
+.todo-input:focus{border-color:var(–orange);}
+.todo-input::placeholder{color:var(–muted);}
+.todo-add-btn{background:var(–orange);border:none;border-radius:10px;padding:10px 16px;color:#fff;font-family:‘Cairo’,sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;}
+.todo-list{max-width:860px;margin:0 auto;}
+.todo-item{background:var(–card);border:1px solid var(–border);border-radius:11px;padding:11px 14px;margin-bottom:7px;display:flex;align-items:center;gap:10px;}
+.todo-item.done-t{opacity:.6;}
+.todo-item.done-t .todo-text{text-decoration:line-through;color:var(–muted);}
+.todo-check{width:22px;height:22px;border-radius:99px;border:2px solid var(–border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:transparent;transition:all .2s;flex-shrink:0;}
+.todo-item.done-t .todo-check{background:rgba(16,185,129,.2);border-color:var(–done);color:var(–done);}
+.todo-text{flex:1;font-size:.82rem;}
+.todo-del{background:transparent;border:none;color:var(–muted);cursor:pointer;font-size:.8rem;padding:4px;transition:color .15s;}
+.todo-del:hover{color:var(–red);}
+.todo-stats{max-width:860px;margin:0 auto 10px;background:var(–card);border:1px solid var(–border);border-radius:11px;padding:10px 14px;display:flex;align-items:center;gap:10px;}
+.todo-prog{flex:1;height:5px;background:var(–border);border-radius:99px;overflow:hidden;}
+.todo-prog-fill{height:100%;background:var(–done);border-radius:99px;transition:width .3s;}
+.todo-prog-lbl{font-size:.7rem;color:var(–muted);}
+.empty-todo{text-align:center;padding:24px;color:var(–muted);font-size:.8rem;}
+</style>
+
+</head>
+<body>
+
+<div class="tabs">
+  <div class="tab active" id="tab-lessons" onclick="showPage('lessons',this)">📚 الدروس</div>
+  <div class="tab" id="tab-schedule" onclick="showPage('schedule',this)">🗓️ الجدول</div>
+  <div class="tab" id="tab-stats" onclick="showPage('stats',this)">📊 الإحصائيات</div>
+  <div class="tab" id="tab-todo" onclick="showPage('todo',this)">📝 المهام</div>
+</div>
+
+<!-- PAGE: LESSONS -->
+
+<div class="page active" id="page-lessons">
+<header><h1>🎓 لائحة مراجعة البكالوريا</h1><p>تتبع مراجعتك درساً بدرس</p></header>
+<div class="total-wrap">
+  <div class="total-label">التقدم الإجمالي</div>
+  <div class="bar-track"><div class="bar-fill" id="gfill" style="width:0%"></div></div>
+  <div class="total-pct" id="gpct">0%</div>
+</div>
+<div class="overview">
+  <div class="ov phys"><div class="ico">⚛️</div><div class="lbl">الفيزياء</div><div class="num" id="op-phys">0%</div><div class="cnt" id="oc-phys"></div></div>
+  <div class="ov chem"><div class="ico">🧪</div><div class="lbl">الكيمياء</div><div class="num" id="op-chem">0%</div><div class="cnt" id="oc-chem"></div></div>
+  <div class="ov math"><div class="ico">📐</div><div class="lbl">الرياضيات</div><div class="num" id="op-math">0%</div><div class="cnt" id="oc-math"></div></div>
+  <div class="ov svt"><div class="ico">🧬</div><div class="lbl">علوم الحياة</div><div class="num" id="op-svt">0%</div><div class="cnt" id="oc-svt"></div></div>
+</div>
+<div class="legend">
+  <div class="leg"><div class="ldot ld-done"></div>تمّت المراجعة</div>
+  <div class="leg"><div class="ldot ld-part"></div>قيد المراجعة</div>
+  <div class="leg"><div class="ldot ld-todo"></div>لم يُراجع بعد</div>
+</div>
+<div id="root"></div>
+</div>
+
+<!-- PAGE: SCHEDULE -->
+
+<div class="page" id="page-schedule">
+<div class="sched-header"><h2>🗓️ جدول حصص المراجعة</h2><p>تتبع حضورك في كل حصة يومياً</p></div>
+<div class="day-tabs" id="day-tabs"></div>
+<div class="sched-stats">
+  <div class="stat-card"><div class="stat-num green" id="st-done">0</div><div class="stat-lbl">مكتملة</div></div>
+  <div class="stat-card"><div class="stat-num orange" id="st-rem">0</div><div class="stat-lbl">متبقية</div></div>
+  <div class="stat-card"><div class="stat-num blue" id="st-hrs">0س</div><div class="stat-lbl">ساعات راجعت</div></div>
+</div>
+<div class="sessions" id="sessions-list"></div>
+<div class="week-sum"><h3>ملخص الأسبوع</h3><div class="week-grid" id="week-grid"></div></div>
+</div>
+
+<!-- PAGE: STATS -->
+
+<div class="page" id="page-stats">
+<div class="stats-header"><h2>📊 الإحصائيات</h2><p>نظرة شاملة على تقدمك</p></div>
+<div class="stats-grid">
+  <div class="big-stat g"><div class="n" id="st-total-done">0</div><div class="l">درس مكتمل</div></div>
+  <div class="big-stat o"><div class="n" id="st-total-rem">0</div><div class="l">درس متبقي</div></div>
+  <div class="big-stat b"><div class="n" id="st-sess-done">0</div><div class="l">حصة مراجعة مكتملة</div></div>
+  <div class="big-stat p"><div class="n" id="st-todo-done">0</div><div class="l">مهمة منجزة</div></div>
+</div>
+<div class="chart-wrap">
+  <div class="chart-title">تقدم المواد</div>
+  <div class="bar-chart" id="bar-chart"></div>
+</div>
+<div class="subject-bars" id="subj-bars">
+  <div class="chart-title">تفاصيل كل مادة</div>
+</div>
+</div>
+
+<!-- PAGE: TODO -->
+
+<div class="page" id="page-todo">
+<div class="todo-header"><h2>📝 قائمة المهام اليومية</h2><p>نظّم مهامك لكل يوم</p></div>
+<div class="todo-day-tabs" id="todo-day-tabs"></div>
+<div class="todo-stats">
+  <div class="todo-prog-lbl" id="todo-lbl">0 / 0 مهمة</div>
+  <div class="todo-prog"><div class="todo-prog-fill" id="todo-prog-fill" style="width:0%"></div></div>
+</div>
+<div class="todo-add">
+  <input class="todo-input" id="todo-input" placeholder="أضف مهمة جديدة..." />
+  <button class="todo-add-btn" onclick="addTodo()">إضافة</button>
+</div>
+<div class="todo-list" id="todo-list"></div>
+</div>
+
+<script>
+// ========== DATA ==========
+const LESSONS_DATA=[
+  {id:'phys',label:'الفيزياء',sub:'Physique',icon:'⚛️',chapters:[
+    {title:'الموجات',lessons:[
+      {name:'الموجات الميكانيكية المتوالية',sub:'تعريف الموجة، سرعة الانتشار، التأخر الزمني'},
+      {name:'الموجات الميكانيكية المتوالية الدورية',sub:'الدورية الزمانية والمكانية، ظاهرة الحيود'},
+      {name:'انتشار موجة ضوئية',sub:'الطبيعة الموجية للضوء، حيود الضوء، تبدد الضوء بالمنشور'},
+    ]},
+    {title:'التحولات النووية',lessons:[
+      {name:'التناقص الإشعاعي',sub:'استقرار النوى، الإشعاع α وβ وγ، قانون التناقص'},
+      {name:'النوى والكتلة والطاقة',sub:'النقص الكتلي، طاقة الربط، الانشطار والاندماج النووي'},
+    ]},
+    {title:'الكهرباء',lessons:[
+      {name:'ثنائي القطب RC',sub:'شحن وتفريغ المكثف، ثابتة الزمن τ=RC'},
+      {name:'ثنائي القطب RL',sub:'إقامة وانعدام التيار في الوشيعة، معامل الحث L'},
+      {name:'تذبذبات دارة RLC متوالية',sub:'التذبذبات الحرة، أنظمة التخميد، صيانة التذبذبات'},
+      {name:'تضمين الوسع (المكبّر العملياتي)',sub:'مبدأ التضمين، كاشف الغلاف، التطبيقات'},
+    ]},
+    {title:'الميكانيك',lessons:[
+      {name:'قوانين نيوتن',sub:'متجه السرعة والتسارع، القوانين الثلاثة'},
+      {name:'السقوط الرأسي',sub:'السقوط الحر بإهمال الاحتكاك، والسقوط مع احتكاك الهواء'},
+      {name:'الحركات المستوية',sub:'حركة قذيفة في مجال ثقالة، حركة جسيم مشحون'},
+      {name:'الأقمار الصناعية والكواكب',sub:'قوانين كيبلر الثلاثة، الحركة الدائرية المنتظمة'},
+      {name:'الدوران',sub:'حركة دوران جسم صلب حول محور ثابت'},
+      {name:'المتذبذبات الميكانيكية',sub:'النواس المرن، نواس اللي، النواس الوازن، النواس البسيط'},
+      {name:'المظاهر الطاقية للمتذبذبات',sub:'طاقة الوضع، الطاقة الحركية، الطاقة الميكانيكية'},
+      {name:'ميكانيك نيوتن والذرة',sub:'تكميم الطاقة، طيف الانبعاث، نموذج بور'},
+    ]},
+  ]},
+  {id:'chem',label:'الكيمياء',sub:'Chimie',icon:'🧪',chapters:[
+    {title:'التحولات الزمنية والتوازن',lessons:[
+      {name:'التحولات السريعة والبطيئة',sub:'العوامل الكينيتية المؤثرة في سرعة التفاعل'},
+      {name:'تتبع تحول كيميائي',sub:'السرعة الحجمية للتفاعل، زمن نصف التفاعل t½'},
+      {name:'التحولات في منحيين',sub:'نسبة التقدم النهائي τ، ثابتة التوازن K'},
+      {name:'حالة توازن مجموعة كيميائية',sub:'خارج التفاعل Qr، تأثير الظروف على التوازن'},
+      {name:'تفاعلات حمض-قاعدة',sub:'ثابتة الحمضية Ka، سلم pH، حسابات pH'},
+      {name:'المعايرة الحمضية القاعدية',sub:'تحديد التركيز المجهول، نقطة التكافؤ'},
+    ]},
+    {title:'منحى تطور المجموعات',lessons:[
+      {name:'التطور التلقائي',sub:'معيار التطور التلقائي بمقارنة Qr بـ K'},
+      {name:'الأعمدة الكهروكيميائية',sub:'الاشتغال الكيميائي، القوة الكهرومحركة'},
+      {name:'التحولات القسرية (التحليل الكهربائي)',sub:'مبدأ التحليل الكهربائي، تطبيقاته'},
+      {name:'الأسترة والحلمأة',sub:'الخصائص والتوازن، مراقبة سرعة التفاعل ومردوده'},
+    ]},
+  ]},
+  {id:'math',label:'الرياضيات',sub:'Mathématiques',icon:'📐',chapters:[
+    {title:'التحليل',lessons:[
+      {name:'الاتصال',sub:'الاتصال على مجال، قضية القيم الوسيطية، الدوال العكسية'},
+      {name:'الاشتقاق ودراسة الدوال',sub:'تطبيقات الاشتقاق، الرتابة، جدول التغيرات'},
+      {name:'المتتاليات العددية',sub:'النهايات، التقارب، المتتاليات u_{n+1}=f(u_n)'},
+      {name:'الدوال اللوغاريتمية',sub:'الدالة ln والدالة log، خصائصهما وتطبيقاتهما'},
+      {name:'الدوال الأسية',sub:'الدالة e^x، النمو والتناقص الأسي'},
+      {name:'الدوال الأصلية والتكامل',sub:'تقنيات الحساب التكاملي، المساحات والحجوم'},
+      {name:'المعادلات التفاضلية',sub:"حل y'=ay+b و y''+ay'+by=0"},
+    ]},
+    {title:'الجبر والهندسة والاحتمالات',lessons:[
+      {name:'الأعداد العقدية',sub:'الشكل الجبري، المثلثي، الأسي، التطبيقات الهندسية'},
+      {name:'الهندسة الفضائية',sub:'الجداء السلمي والمتجهي، المستقيم والمستوى والكرة'},
+      {name:'الحساب الاحتمالي',sub:'التعداد، الاحتمال الشرطي، متغير عشوائي منفصل'},
+    ]},
+  ]},
+  {id:'svt',label:'علوم الحياة والأرض',sub:'SVT',icon:'🧬',chapters:[
+    {title:'وحدات البرنامج',lessons:[
+      {name:'الطاقة الخلوية',sub:'التنفس الخلوي والتخمر، تجديد ATP، التقلص العضلي'},
+      {name:'الوراثة الجزيئية',sub:'طبيعة الخبر الوراثي، التعبير البروتيني، الهندسة الوراثية'},
+      {name:'التوالد الجنسي وانتقال الصفات',sub:'الانقسام الاختزالي والإخصاب، قوانين ماندل'},
+      {name:'البيئة والتلوث',sub:'تلوث الهواء والماء والتربة، النفايات، الطاقة النووية'},
+      {name:'الجيولوجيا الداخلية',sub:'تكتونية الصفائح، السلاسل الجبلية، الصخور المتحولة والغرانيتية'},
+    ]},
+  ]},
+];
+
+const DAYS=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+const SCHEDULE={
+  'الاثنين':[{id:'mon1',time:'19:30 - 22:00',dur:'2س30د',name:'رياضيات مراجعة',sub:'مراجعة عامة في الرياضيات',mins:150}],
+  'الثلاثاء':[{id:'tue1',time:'19:30 - 22:00',dur:'2س30د',name:'رياضيات مراجعة',sub:'مراجعة عامة في الرياضيات',mins:150}],
+  'الأربعاء':[
+    {id:'wed1',time:'16:00 - 18:00',dur:'2س',name:'رياضيات مراجعة',sub:'مراجعة بعد المدرسة',mins:120},
+    {id:'wed2',time:'19:30 - 22:00',dur:'2س30د',name:'إنجليزية + فلسفة / رياضيات',sub:'مراجعة مشتركة',mins:150},
+    {id:'wed3',time:'20:30 - 22:30',dur:'2س',name:'رياضيات مركز',sub:'حصة تركيز في الرياضيات',mins:120},
+  ],
+  'الخميس':[{id:'thu1',time:'19:30 - 22:00',dur:'2س30د',name:'رياضيات مراجعة',sub:'مراجعة عامة في الرياضيات',mins:150}],
+  'الجمعة':[
+    {id:'fri1',time:'16:00 - 18:00',dur:'2س',name:'فيزياء PC مراجعة',sub:'مراجعة الفيزياء',mins:120},
+    {id:'fri2',time:'19:30 - 22:00',dur:'2س30د',name:'رياضيات مراجعة',sub:'مراجعة عامة في الرياضيات',mins:150},
+  ],
+  'السبت':[
+    {id:'sat1',time:'16:00 - 18:00',dur:'2س',name:'فيزياء PC مراجعة',sub:'مراجعة الفيزياء',mins:120},
+    {id:'sat2',time:'19:30 - 22:00',dur:'2س30د',name:'SVT ذ30 ثم رياضيات',sub:'مراجعة SVT والرياضيات',mins:150},
+  ],
+  'الأحد':[
+    {id:'sun1',time:'10:25 - 11:10',dur:'45د',name:'رياضيات مراجعة',sub:'حصة صباحية',mins:45},
+    {id:'sun2',time:'11:15 - 12:00',dur:'45د',name:'فيزياء PC مراجعة',sub:'حصة صباحية',mins:45},
+    {id:'sun3',time:'12:30 - 13:15',dur:'45د',name:'رياضيات مراجعة',sub:'حصة ظهيرة',mins:45},
+    {id:'sun4',time:'16:00 - 18:00',dur:'2س',name:'رياضيات مراجعة مركز',sub:'حصة بعد الظهر',mins:120},
+    {id:'sun5',time:'19:30 - 22:00',dur:'2س30د',name:'فيزياء PC / رياضيات',sub:'مراجعة مسائية',mins:150},
+  ],
+};
+
+const SUBJ_COLORS={phys:'#38bdf8',chem:'#c084fc',math:'#fb7185',svt:'#34d399'};
+
+// ========== STATE ==========
+const ST=JSON.parse(localStorage.getItem('bac5_st')||'{}');
+function save(){localStorage.setItem('bac5_st',JSON.stringify(ST));}
+function lid(sid,ci,li){return`${sid}_${ci}_${li}`;}
+function gst(id){return ST[id]||'todo';}
+function sst(id,v){ST[id]=v;save();refreshLessons();}
+function gss(id){return ST['s_'+id]||false;}
+function sss(id,v){ST['s_'+id]=v;save();}
+
+// ========== TABS ==========
+function showPage(p,el){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  el.classList.add('active');
+  if(p==='schedule'){renderSchedule();}
+  if(p==='stats'){renderStats();}
+  if(p==='todo'){renderTodo();}
+}
+
+// ========== LESSONS ==========
+function calcPct(sid){
+  const s=LESSONS_DATA.find(x=>x.id===sid);let tot=0,val=0;
+  s.chapters.forEach((c,ci)=>c.lessons.forEach((_,li)=>{
+    const st=gst(lid(sid,ci,li));tot++;if(st==='done')val++;else if(st==='part')val+=.5;
+  }));return tot?Math.round(val/tot*100):0;
+}
+function calcCounts(sid){
+  const s=LESSONS_DATA.find(x=>x.id===sid);let tot=0,done=0;
+  s.chapters.forEach((c,ci)=>c.lessons.forEach((_,li)=>{
+    tot++;if(gst(lid(sid,ci,li))==='done')done++;
+  }));return{tot,done};
+}
+function refreshLessons(){
+  let gtot=0,gval=0;
+  LESSONS_DATA.forEach(s=>{
+    const p=calcPct(s.id);const{tot,done}=calcCounts(s.id);
+    const el=document.getElementById('op-'+s.id);
+    const mf=document.getElementById('mf-'+s.id);
+    const mp=document.getElementById('mp-'+s.id);
+    const oc=document.getElementById('oc-'+s.id);
+    if(el)el.textContent=p+'%';if(mf)mf.style.width=p+'%';if(mp)mp.textContent=p+'%';
+    if(oc)oc.textContent=done+' / '+tot+' درس';
+    s.chapters.forEach((c,ci)=>c.lessons.forEach((_,li)=>{
+      const id=lid(s.id,ci,li);const st=gst(id);gtot++;
+      if(st==='done')gval++;else if(st==='part')gval+=.5;
+      const row=document.getElementById('r-'+id);
+      const db=document.getElementById('db-'+id);
+      const pb=document.getElementById('pb-'+id);
+      if(row)row.classList.toggle('done',st==='done');
+      if(db)db.classList.toggle('is-done',st==='done');
+      if(pb)pb.classList.toggle('is-part',st==='part');
+    }));
+  });
+  const gp=gtot?Math.round(gval/gtot*100):0;
+  document.getElementById('gfill').style.width=gp+'%';
+  document.getElementById('gpct').textContent=gp+'%';
+}
+function buildLessons(){
+  const root=document.getElementById('root');
+  LESSONS_DATA.forEach(s=>{
+    const block=document.createElement('div');block.className=`block ${s.id}`;
+    const head=document.createElement('div');head.className='block-head';
+    head.innerHTML=`<div class="bico">${s.icon}</div><div class="btitle"><div class="main">${s.label}</div><div class="sub">${s.sub}</div></div><div class="mini-bar"><div class="mini-fill" id="mf-${s.id}" style="width:0%"></div></div><div class="mini-pct" id="mp-${s.id}">0%</div><div class="chv open" id="chv-${s.id}">▼</div>`;
+    const body=document.createElement('div');body.id='body-'+s.id;
+    head.addEventListener('click',()=>{
+      const b=document.getElementById('body-'+s.id);const c=document.getElementById('chv-'+s.id);
+      const hidden=b.style.display==='none';b.style.display=hidden?'':'none';c.classList.toggle('open',hidden);
+    });
+    s.chapters.forEach((ch,ci)=>{
+      const cw=document.createElement('div');cw.className='chap-wrap';
+      const ct=document.createElement('div');ct.className='ch-t';ct.textContent=ch.title;cw.appendChild(ct);
+      ch.lessons.forEach((les,li)=>{
+        const id=lid(s.id,ci,li);const nk='n_'+id;const note=(ST[nk]||'').replace(/"/g,'&quot;');
+        const row=document.createElement('div');row.className='lesson';row.id='r-'+id;
+        row.innerHTML=`<div class="ltext"><div class="lname">${les.name}</div><div class="lsub">${les.sub}</div></div><input class="note" placeholder="ملاحظة..." value="${note}" id="ni-${id}" /><div class="sbg"><button class="sb" id="pb-${id}">⟳</button><button class="sb" id="db-${id}">✓</button></div>`;
+        row.querySelector('#db-'+id).addEventListener('click',e=>{e.stopPropagation();sst(id,gst(id)==='done'?'todo':'done');});
+        row.querySelector('#pb-'+id).addEventListener('click',e=>{e.stopPropagation();sst(id,gst(id)==='part'?'todo':'part');});
+        row.querySelector('#ni-'+id).addEventListener('input',e=>{ST[nk]=e.target.value;save();});
+        row.querySelector('#ni-'+id).addEventListener('click',e=>e.stopPropagation());
+        cw.appendChild(row);
+      });
+      body.appendChild(cw);
+    });
+    block.appendChild(head);block.appendChild(body);root.appendChild(block);
+  });
+}
+
+// ========== SCHEDULE ==========
+let activeDay=DAYS[new Date().getDay()];
+function buildDayTabs(){
+  const cont=document.getElementById('day-tabs');
+  DAYS.forEach(d=>{
+    const btn=document.createElement('button');btn.className='dtab'+(d===activeDay?' active':'');btn.textContent=d;
+    btn.addEventListener('click',()=>{activeDay=d;document.querySelectorAll('.dtab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderSessions();});
+    cont.appendChild(btn);
+  });
+}
+function renderSchedule(){renderSessions();renderWeekGrid();}
+function renderSessions(){
+  const list=document.getElementById('sessions-list');list.innerHTML='';
+  const sessions=SCHEDULE[activeDay]||[];
+  if(!sessions.length){list.innerHTML='<div class="no-sessions">🌙 لا توجد حصص مراجعة هذا اليوم</div>';}
+  else{
+    sessions.forEach(s=>{
+      const done=gss(activeDay+'_'+s.id);
+      const card=document.createElement('div');card.className='session-card'+(done?' done-s':'');
+      card.innerHTML=`<div class="session-time"><div class="t">${s.time}</div><div class="dur">${s.dur}</div></div><div class="session-info"><div class="session-name">${s.name}</div><div class="session-sub">${s.sub}</div></div><button class="session-check" id="sc-${s.id}">${done?'✓':'○'}</button>`;
+      card.querySelector('#sc-'+s.id).addEventListener('click',e=>{e.stopPropagation();sss(activeDay+'_'+s.id,!gss(activeDay+'_'+s.id));renderSessions();renderWeekGrid();});
+      list.appendChild(card);
+    });
+  }
+  const done=sessions.filter(s=>gss(activeDay+'_'+s.id));
+  const doneMin=done.reduce((a,s)=>a+s.mins,0);
+  document.getElementById('st-done').textContent=done.length;
+  document.getElementById('st-rem').textContent=sessions.length-done.length;
+  const h=Math.floor(doneMin/60),m=doneMin%60;
+  document.getElementById('st-hrs').textContent=h>0?(m>0?h+'س'+m+'د':h+'س'):(m?m+'د':'0د');
+}
+function renderWeekGrid(){
+  const grid=document.getElementById('week-grid');grid.innerHTML='';
+  DAYS.forEach(d=>{
+    const sessions=SCHEDULE[d]||[];const tot=sessions.length;
+    const done=sessions.filter(s=>gss(d+'_'+s.id)).length;
+    const pct=tot?Math.round(done/tot*100):0;
+    const col=document.createElement('div');col.className='wday';
+    col.innerHTML=`<div class="wday-name">${d.substring(0,3)}</div><div class="wday-bar"><div class="wday-fill${pct===100?' full':''}" style="height:${pct}%"></div></div><div class="wday-pct">${tot?pct+'%':'—'}</div>`;
+    grid.appendChild(col);
+  });
+}
+
+// ========== STATS ==========
+function renderStats(){
+  // Lessons stats
+  let totalDone=0,totalRem=0;
+  LESSONS_DATA.forEach(s=>{
+    const{tot,done}=calcCounts(s.id);totalDone+=done;totalRem+=(tot-done);
+  });
+  document.getElementById('st-total-done').textContent=totalDone;
+  document.getElementById('st-total-rem').textContent=totalRem;
+
+  // Sessions done this week
+  let sessDone=0;
+  DAYS.forEach(d=>{(SCHEDULE[d]||[]).forEach(s=>{if(gss(d+'_'+s.id))sessDone++;});});
+  document.getElementById('st-sess-done').textContent=sessDone;
+
+  // Todos done
+  const allTodos=ST['todos']||{};
+  let tdDone=0;
+  Object.values(allTodos).forEach(arr=>arr.forEach(t=>{if(t.done)tdDone++;}));
+  document.getElementById('st-todo-done').textContent=tdDone;
+
+  // Bar chart
+  const chart=document.getElementById('bar-chart');chart.innerHTML='';
+  const maxH=100;
+  LESSONS_DATA.forEach(s=>{
+    const p=calcPct(s.id);
+    const wrap=document.createElement('div');wrap.className='bc-bar-wrap';
+    wrap.innerHTML=`<div class="bc-val" style="color:${SUBJ_COLORS[s.id]}">${p}%</div><div class="bc-bar" style="height:${Math.max(p,4)}px;background:${SUBJ_COLORS[s.id]};opacity:.8"></div><div class="bc-label">${s.label.split('ال')[1]||s.label}</div>`;
+    chart.appendChild(wrap);
+  });
+
+  // Subject bars
+  const sb=document.getElementById('subj-bars');
+  sb.innerHTML='<div class="chart-title">تفاصيل كل مادة</div>';
+  LESSONS_DATA.forEach(s=>{
+    const p=calcPct(s.id);const{tot,done}=calcCounts(s.id);
+    const row=document.createElement('div');row.className='subj-row';
+    row.innerHTML=`<div class="subj-name" style="color:${SUBJ_COLORS[s.id]}">${s.icon} ${s.label}</div><div class="subj-bar-wrap"><div class="subj-bar-fill" style="width:${p}%;background:${SUBJ_COLORS[s.id]}"></div></div><div class="subj-pct" style="color:${SUBJ_COLORS[s.id]}">${p}%</div>`;
+    sb.appendChild(row);
+    const sub2=document.createElement('div');sub2.style.cssText='font-size:.62rem;color:var(--muted);margin:-6px 0 8px 0;padding-right:80px;';
+    sub2.textContent=done+' من أصل '+tot+' درس مكتمل';
+    sb.appendChild(sub2);
+  });
+}
+
+// ========== TODO ==========
+let activeTodoDay=DAYS[new Date().getDay()];
+function buildTodoDayTabs(){
+  const cont=document.getElementById('todo-day-tabs');
+  DAYS.forEach(d=>{
+    const btn=document.createElement('button');btn.className='dtab'+(d===activeTodoDay?' active':'');btn.textContent=d;
+    btn.addEventListener('click',()=>{activeTodoDay=d;document.querySelectorAll('#todo-day-tabs .dtab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderTodoList();});
+    cont.appendChild(btn);
+  });
+}
+function getTodos(){const t=ST['todos']||{};return t[activeTodoDay]||[];}
+function saveTodos(arr){if(!ST['todos'])ST['todos']={};ST['todos'][activeTodoDay]=arr;save();}
+function addTodo(){
+  const inp=document.getElementById('todo-input');const txt=inp.value.trim();
+  if(!txt)return;
+  const todos=getTodos();todos.push({id:Date.now(),text:txt,done:false});
+  saveTodos(todos);inp.value='';renderTodoList();
+}
+function renderTodo(){renderTodoList();}
+function renderTodoList(){
+  const list=document.getElementById('todo-list');list.innerHTML='';
+  const todos=getTodos();
+  if(!todos.length){list.innerHTML='<div class="empty-todo">📋 لا توجد مهام لهذا اليوم<br>أضف مهمة جديدة أعلاه</div>';}
+  else{
+    todos.forEach((t,i)=>{
+      const item=document.createElement('div');item.className='todo-item'+(t.done?' done-t':'');
+      item.innerHTML=`<button class="todo-check" id="tc-${t.id}">${t.done?'✓':''}</button><div class="todo-text">${t.text}</div><button class="todo-del" id="td-${t.id}">✕</button>`;
+      item.querySelector('#tc-'+t.id).addEventListener('click',()=>{const todos2=getTodos();todos2[i].done=!todos2[i].done;saveTodos(todos2);renderTodoList();});
+      item.querySelector('#td-'+t.id).addEventListener('click',()=>{const todos2=getTodos();todos2.splice(i,1);saveTodos(todos2);renderTodoList();});
+      list.appendChild(item);
+    });
+  }
+  // Progress
+  const done=todos.filter(t=>t.done).length;
+  const pct=todos.length?Math.round(done/todos.length*100):0;
+  document.getElementById('todo-lbl').textContent=done+' / '+todos.length+' مهمة';
+  document.getElementById('todo-prog-fill').style.width=pct+'%';
+}
+
+// Enter key for todo
+document.getElementById('todo-input').addEventListener('keydown',e=>{if(e.key==='Enter')addTodo();});
+
+// ========== INIT ==========
+buildLessons();refreshLessons();buildDayTabs();buildTodoDayTabs();
+</script>
+
+</body>
+</html>
