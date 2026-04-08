@@ -13,7 +13,6 @@
   box-sizing: border-box;
 }
 
-/* خلفية رومانسية متدرجة مع قلوب متحركة */
 body {
   font-family: 'Inter', sans-serif;
   background: linear-gradient(145deg, #2d1b2e 0%, #4a2c3f 40%, #6b3a4a 70%, #8b4a5c 100%);
@@ -28,7 +27,6 @@ body {
   overflow-x: hidden;
 }
 
-/* قلوب عائمة في الخلفية */
 body::before {
   content: '❤️ 💕 💗 💖 💘 💝';
   position: fixed;
@@ -58,21 +56,18 @@ body::before {
   100% { transform: translateY(10px) rotate(-3deg); opacity: 0.08; }
 }
 
-/* Autoriser la sélection dans les champs de saisie */
 input, textarea, [contenteditable="true"] {
   -webkit-user-select: text;
   user-select: text;
   -webkit-touch-callout: default;
 }
 
-/* Glass morphism effect - plus romantique */
 .glass {
   background: rgba(60, 30, 45, 0.5);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 180, 200, 0.25);
 }
 
-/* Layout */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -81,7 +76,6 @@ input, textarea, [contenteditable="true"] {
   z-index: 2;
 }
 
-/* Header */
 .header {
   text-align: center;
   margin-bottom: 32px;
@@ -122,7 +116,6 @@ input, textarea, [contenteditable="true"] {
   font-style: italic;
 }
 
-/* Tabs Navigation */
 .tabs {
   display: flex;
   gap: 12px;
@@ -168,7 +161,6 @@ input, textarea, [contenteditable="true"] {
   box-shadow: 0 4px 12px rgba(230, 100, 140, 0.4);
 }
 
-/* Pages */
 .page {
   display: none;
   animation: fadeIn 0.4s ease;
@@ -183,7 +175,6 @@ input, textarea, [contenteditable="true"] {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Progress Card */
 .progress-card {
   background: linear-gradient(135deg, rgba(70, 35, 50, 0.7), rgba(90, 45, 60, 0.6));
   backdrop-filter: blur(8px);
@@ -254,7 +245,6 @@ input, textarea, [contenteditable="true"] {
   100% { transform: translateX(100%); }
 }
 
-/* Stats Grid */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -296,7 +286,6 @@ input, textarea, [contenteditable="true"] {
   margin-top: 4px;
 }
 
-/* Subject Cards Grid */
 .subjects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -392,7 +381,6 @@ input, textarea, [contenteditable="true"] {
   display: block;
 }
 
-/* Chapter Styles */
 .chapter {
   margin-top: 16px;
 }
@@ -466,15 +454,19 @@ input, textarea, [contenteditable="true"] {
 }
 
 .status-btn.done {
-  background: rgba(200, 120, 150, 0.3);
-  border-color: #e090a0;
-  color: #f8d0e0;
+  background: rgba(255, 140, 180, 0.25);
+  border-color: #ff8aae;
+  color: #ffb0c0;
 }
 
 .status-btn.partial {
-  background: rgba(230, 160, 120, 0.2);
-  border-color: #e0a080;
-  color: #f0c0a0;
+  background: rgba(255, 180, 150, 0.2);
+  border-color: #f0a080;
+  color: #f5c0a0;
+}
+
+.lesson-name[style*="line-through"] {
+  color: #d0a0b0 !important;
 }
 
 .note-input {
@@ -493,7 +485,6 @@ input, textarea, [contenteditable="true"] {
   border-color: #ff90a0;
 }
 
-/* Todo Section */
 .todo-section {
   background: rgba(60, 30, 45, 0.6);
   backdrop-filter: blur(8px);
@@ -637,7 +628,6 @@ input, textarea, [contenteditable="true"] {
   color: #c0a0b0;
 }
 
-/* Stats Page */
 .stats-container {
   background: rgba(60, 30, 45, 0.6);
   backdrop-filter: blur(8px);
@@ -694,7 +684,6 @@ input, textarea, [contenteditable="true"] {
   background: linear-gradient(180deg, rgba(255,255,255,0.2), transparent);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .container {
     padding: 16px;
@@ -728,7 +717,6 @@ input, textarea, [contenteditable="true"] {
   }
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -860,13 +848,13 @@ input, textarea, [contenteditable="true"] {
 </div>
 
 <script>
-// Désactiver le menu contextuel (copie longue pression)
+// Désactiver le menu contextuel
 document.addEventListener('contextmenu', function(e) {
   e.preventDefault();
   return false;
 });
 
-// Données des cours
+// Données des cours (inchangées)
 const LESSONS_DATA = [
   {
     id: 'phys', name: 'Physique', icon: 'fas fa-atom', color: '#ffb0c0',
@@ -979,7 +967,6 @@ function setLessonNote(key, note) {
   saveStorage();
 }
 
-// Mise à jour visuelle d'un seul élément de leçon
 function updateLessonUI(key, status) {
   const lessonDiv = document.querySelector(`.lesson-item[data-key="${key}"]`);
   if (!lessonDiv) return;
@@ -990,7 +977,7 @@ function updateLessonUI(key, status) {
   if (lessonName) {
     if (status === 'done') {
       lessonName.style.textDecoration = 'line-through';
-      lessonName.style.color = '#b090a0';
+      lessonName.style.color = '#d0a0b0';
     } else {
       lessonName.style.textDecoration = 'none';
       lessonName.style.color = '';
@@ -1006,7 +993,6 @@ function updateLessonUI(key, status) {
   }
 }
 
-// Calcul des pourcentages
 function getSubjectProgress(subjId) {
   const subject = LESSONS_DATA.find(s => s.id === subjId);
   let total = 0, done = 0;
@@ -1058,7 +1044,6 @@ function getCompletedLessonsCount() {
   return done;
 }
 
-// Tâches
 function getTodos() {
   return storage.todos || [];
 }
@@ -1096,7 +1081,6 @@ function getCompletedTodosCount() {
   return getTodos().filter(t => t.completed).length;
 }
 
-// Rendu des cours
 function renderLessons() {
   const grid = document.getElementById('subjectsGrid');
   grid.innerHTML = '';
@@ -1131,7 +1115,7 @@ function renderLessons() {
                 <div class="lesson-item" data-key="${key}">
                   <div class="lesson-header">
                     <div class="lesson-content">
-                      <div class="lesson-name" style="${status === 'done' ? 'text-decoration: line-through; color: #b090a0;' : ''}">${lesson.name}</div>
+                      <div class="lesson-name" style="${status === 'done' ? 'text-decoration: line-through; color: #d0a0b0;' : ''}">${lesson.name}</div>
                       <div class="lesson-sub">${lesson.sub}</div>
                     </div>
                     <div class="lesson-actions">
@@ -1157,7 +1141,6 @@ function renderLessons() {
     grid.appendChild(card);
   });
   
-  // Attacher les événements
   document.querySelectorAll('.subject-header').forEach(header => {
     header.removeEventListener('click', headerClickHandler);
     header.addEventListener('click', headerClickHandler);
@@ -1212,7 +1195,6 @@ function noteChangeHandler(e) {
   }
 }
 
-// Rendu des statistiques
 function renderStats() {
   const totalLessons = getTotalLessonsCount();
   const completedLessons = getCompletedLessonsCount();
@@ -1281,7 +1263,6 @@ function refreshAll() {
   document.getElementById('globalPercent').textContent = global + '%';
   document.getElementById('globalBar').style.width = global + '%';
   
-  // Mettre à jour les pourcentages dans les cartes
   document.querySelectorAll('.subject-card').forEach((card, idx) => {
     const subjects = ['phys', 'chem', 'math', 'svt'];
     const subjId = subjects[idx];
@@ -1295,7 +1276,6 @@ function refreshAll() {
   renderStats();
 }
 
-// Navigation
 window.showPage = function(page, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -1305,7 +1285,6 @@ window.showPage = function(page, btn) {
   if (page === 'todo') renderTodoList();
 };
 
-// Exposer les fonctions globales
 window.toggleTodo = toggleTodo;
 window.deleteTodo = deleteTodo;
 window.addTodo = addTodo;
