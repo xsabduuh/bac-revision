@@ -1050,7 +1050,7 @@ function renderLessons() {
     const card = document.createElement('div');
     card.className = 'subject-card';
     const progress = getSubjectProgress(subject.id);
-    const isOpen = openSubjects[subject.id] !== false;
+    const isOpen = openSubjects[subject.id] === true;  // <-- التعديل الوحيد: مغلقة افتراضياً
     
     card.innerHTML = `
       <div class="subject-header" data-subj="${subject.id}">
