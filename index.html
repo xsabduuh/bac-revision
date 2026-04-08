@@ -3,47 +3,48 @@
 <html lang="fr" dir="ltr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Révision Bac – Tracker</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Révision Bac</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #07080f;
-  --bg2: #0d0f1c;
-  --card: #111320;
-  --card2: #161929;
-  --border: #1e2236;
+  --bg:      #07080f;
+  --bg2:     #0d0f1c;
+  --card:    #111320;
+  --card2:   #161929;
+  --border:  #1e2236;
   --border2: #252a42;
-  --text: #e8ecf8;
-  --muted: #4e5a7a;
-  --muted2: #6b7899;
-  --done: #10b981;
+  --text:    #e8ecf8;
+  --muted:   #4e5a7a;
+  --muted2:  #6b7899;
+  --done:    #10b981;
   --partial: #f59e0b;
-  --phys: #38bdf8;
-  --chem: #c084fc;
-  --math: #fb7185;
-  --svt: #34d399;
-  --orange: #f97316;
-  --red: #ef4444;
-  --accent: #6366f1;
+  --phys:    #38bdf8;
+  --chem:    #c084fc;
+  --math:    #fb7185;
+  --svt:     #34d399;
+  --orange:  #f97316;
+  --red:     #ef4444;
+  --accent:  #6366f1;
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { color-scheme: dark; }
 
 body {
 background: var(–bg);
 color: var(–text);
 font-family: ‘DM Sans’, sans-serif;
 min-height: 100vh;
-padding-bottom: 80px;
+padding-bottom: 90px;
 background-image:
-radial-gradient(ellipse 70% 50% at 5% 0%, rgba(99,102,241,.07) 0%, transparent 60%),
+radial-gradient(ellipse 70% 50% at 5% 0%,   rgba(99,102,241,.07) 0%, transparent 60%),
 radial-gradient(ellipse 50% 40% at 95% 100%, rgba(192,132,252,.05) 0%, transparent 60%),
-radial-gradient(ellipse 40% 30% at 50% 50%, rgba(56,189,248,.03) 0%, transparent 70%);
+radial-gradient(ellipse 40% 30% at 50% 50%,  rgba(56,189,248,.03) 0%, transparent 70%);
 }
 
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar { width: 3px; height: 3px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(–border2); border-radius: 99px; }
 
@@ -52,8 +53,9 @@ radial-gradient(ellipse 40% 30% at 50% 50%, rgba(56,189,248,.03) 0%, transparent
 display: flex;
 max-width: 900px;
 margin: 0 auto;
-background: rgba(13,15,28,.95);
-backdrop-filter: blur(20px);
+background: rgba(10,11,22,.96);
+backdrop-filter: blur(24px);
+-webkit-backdrop-filter: blur(24px);
 border-bottom: 1px solid var(–border);
 position: sticky;
 top: 0;
@@ -61,45 +63,48 @@ z-index: 100;
 }
 .tab {
 flex: 1;
-padding: 14px 6px;
+padding: 13px 6px 11px;
 text-align: center;
 font-family: ‘Syne’, sans-serif;
-font-size: .72rem;
+font-size: .67rem;
 font-weight: 700;
 color: var(–muted);
 cursor: pointer;
-transition: all .2s;
+transition: color .2s;
 border-bottom: 2px solid transparent;
-letter-spacing: .04em;
+letter-spacing: .05em;
 text-transform: uppercase;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 4px;
 }
+.tab svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: stroke .2s; }
 .tab.active { color: var(–text); border-bottom-color: var(–orange); }
-.tab:hover { color: var(–muted2); }
+.tab.active svg { stroke: var(–orange); }
+.tab:hover:not(.active) { color: var(–muted2); }
 
 .page { display: none; padding: 16px 14px; max-width: 900px; margin: 0 auto; }
 .page.active { display: block; }
 
 /* ── HEADER ── */
-.page-header {
-text-align: center;
-padding: 24px 16px 20px;
-}
+.page-header { text-align: center; padding: 22px 16px 18px; }
 .page-header h1 {
 font-family: ‘Syne’, sans-serif;
-font-size: clamp(1.4rem, 4vw, 2.1rem);
+font-size: clamp(1.35rem, 4vw, 2rem);
 font-weight: 800;
 letter-spacing: -.03em;
 background: linear-gradient(135deg, #e8ecf8 30%, #6366f1 80%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
 }
-.page-header p {
-color: var(–muted2);
-font-size: .78rem;
-margin-top: 5px;
-font-weight: 400;
-}
+.page-header h1 svg { width: 22px; height: 22px; stroke: #6366f1; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; -webkit-text-fill-color: initial; flex-shrink: 0; }
+.page-header p { color: var(–muted2); font-size: .76rem; margin-top: 5px; }
 
 /* ── TOTAL PROGRESS ── */
 .total-wrap {
@@ -123,7 +128,7 @@ pointer-events: none;
 }
 .total-label {
 font-family: ‘Syne’, sans-serif;
-font-size: .68rem;
+font-size: .65rem;
 font-weight: 700;
 color: var(–muted);
 white-space: nowrap;
@@ -134,7 +139,7 @@ letter-spacing: .08em;
 .bar-fill {
 height: 100%;
 border-radius: 99px;
-transition: width .6s cubic-bezier(.4,0,.2,1);
+transition: width .7s cubic-bezier(.4,0,.2,1);
 background: linear-gradient(90deg, var(–phys), var(–accent), var(–chem));
 }
 .total-pct {
@@ -143,7 +148,6 @@ font-size: .95rem;
 font-weight: 800;
 min-width: 40px;
 text-align: right;
-color: var(–text);
 }
 
 /* ── OVERVIEW CARDS ── */
@@ -153,7 +157,7 @@ grid-template-columns: repeat(4, 1fr);
 gap: 8px;
 margin-bottom: 14px;
 }
-@media (max-width: 580px) { .overview { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .overview { grid-template-columns: repeat(2, 1fr); } }
 
 .ov {
 background: var(–card);
@@ -171,23 +175,34 @@ transition: border-color .2s, transform .2s;
 .ov.chem::after { background: var(–chem); }
 .ov.math::after { background: var(–math); }
 .ov.svt::after  { background: var(–svt); }
-.ov .ico { font-size: 1.15rem; margin-bottom: 4px; }
-.ov .lbl { font-size: .6rem; color: var(–muted2); margin-bottom: 2px; font-family: ‘Syne’, sans-serif; text-transform: uppercase; letter-spacing: .06em; }
-.ov .num { font-family: ‘Syne’, sans-serif; font-size: 1.15rem; font-weight: 800; }
+
+.ov .ico {
+width: 28px; height: 28px;
+border-radius: 8px;
+display: flex; align-items: center; justify-content: center;
+margin: 0 auto 5px;
+}
+.ov.phys .ico { background: rgba(56,189,248,.12); }
+.ov.chem .ico { background: rgba(192,132,252,.12); }
+.ov.math .ico { background: rgba(251,113,133,.12); }
+.ov.svt  .ico { background: rgba(52,211,153,.12); }
+.ov .ico svg { width: 15px; height: 15px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ov.phys .ico svg { stroke: var(–phys); }
+.ov.chem .ico svg { stroke: var(–chem); }
+.ov.math .ico svg { stroke: var(–math); }
+.ov.svt  .ico svg { stroke: var(–svt); }
+
+.ov .lbl { font-size: .58rem; color: var(–muted2); margin-bottom: 2px; font-family: ‘Syne’, sans-serif; text-transform: uppercase; letter-spacing: .06em; }
+.ov .num { font-family: ‘Syne’, sans-serif; font-size: 1.1rem; font-weight: 800; }
 .ov.phys .num { color: var(–phys); }
 .ov.chem .num { color: var(–chem); }
 .ov.math .num { color: var(–math); }
 .ov.svt  .num { color: var(–svt); }
-.ov .cnt { font-size: .58rem; color: var(–muted); margin-top: 2px; }
+.ov .cnt { font-size: .56rem; color: var(–muted); margin-top: 2px; }
 
 /* ── LEGEND ── */
-.legend {
-display: flex;
-gap: 14px;
-flex-wrap: wrap;
-margin-bottom: 14px;
-}
-.leg { display: flex; align-items: center; gap: 5px; font-size: .68rem; color: var(–muted2); }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+.leg { display: flex; align-items: center; gap: 5px; font-size: .67rem; color: var(–muted2); }
 .ldot { width: 8px; height: 8px; border-radius: 3px; }
 .ld-done { background: var(–done); }
 .ld-part { background: var(–partial); }
@@ -217,25 +232,26 @@ user-select: none;
 .block-head:hover { background: rgba(255,255,255,.015); }
 
 .bico {
-width: 34px;
-height: 34px;
+width: 36px; height: 36px;
 border-radius: 10px;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 1rem;
+display: flex; align-items: center; justify-content: center;
 flex-shrink: 0;
 }
-.phys .bico { background: rgba(56,189,248,.1); border: 1px solid rgba(56,189,248,.25); }
+.phys .bico { background: rgba(56,189,248,.1);  border: 1px solid rgba(56,189,248,.25); }
 .chem .bico { background: rgba(192,132,252,.1); border: 1px solid rgba(192,132,252,.25); }
 .math .bico { background: rgba(251,113,133,.1); border: 1px solid rgba(251,113,133,.25); }
 .svt  .bico { background: rgba(52,211,153,.1);  border: 1px solid rgba(52,211,153,.25); }
+.bico svg { width: 18px; height: 18px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.phys .bico svg { stroke: var(–phys); }
+.chem .bico svg { stroke: var(–chem); }
+.math .bico svg { stroke: var(–math); }
+.svt  .bico svg { stroke: var(–svt); }
 
-.btitle { flex: 1; }
-.btitle .main { font-family: ‘Syne’, sans-serif; font-size: .88rem; font-weight: 700; }
-.btitle .sub { font-size: .62rem; color: var(–muted); margin-top: 1px; }
+.btitle { flex: 1; min-width: 0; }
+.btitle .main { font-family: ‘Syne’, sans-serif; font-size: .87rem; font-weight: 700; }
+.btitle .sub { font-size: .61rem; color: var(–muted); margin-top: 1px; }
 
-.mini-bar { width: 64px; height: 5px; background: var(–border); border-radius: 99px; overflow: hidden; flex-shrink: 0; }
+.mini-bar { width: 56px; height: 5px; background: var(–border); border-radius: 99px; overflow: hidden; flex-shrink: 0; }
 .mini-fill { height: 100%; border-radius: 99px; transition: width .4s; }
 .phys .mini-fill { background: var(–phys); }
 .chem .mini-fill { background: var(–chem); }
@@ -248,206 +264,69 @@ flex-shrink: 0;
 .math .mini-pct { color: var(–math); }
 .svt  .mini-pct { color: var(–svt); }
 
-.chv { font-size: .58rem; color: var(–muted); transition: transform .25s; flex-shrink: 0; }
-.chv.open { transform: rotate(180deg); }
+.chv { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; color: var(–muted); flex-shrink: 0; }
+.chv svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; transition: transform .25s; }
+.chv.open svg { transform: rotate(180deg); }
 
 /* ── CHAPTERS & LESSONS ── */
 .chap-wrap { padding: 0 10px 6px; }
 .ch-t {
 font-family: ‘Syne’, sans-serif;
-font-size: .6rem;
-font-weight: 700;
+font-size: .58rem; font-weight: 700;
 color: var(–muted);
-text-transform: uppercase;
-letter-spacing: .12em;
+text-transform: uppercase; letter-spacing: .12em;
 padding: 10px 6px 4px;
 }
-
 .lesson {
-display: flex;
-align-items: center;
-gap: 8px;
-padding: 7px 8px;
-border-radius: 10px;
-margin-bottom: 2px;
+display: flex; align-items: center; gap: 8px;
+padding: 7px 8px; border-radius: 10px; margin-bottom: 2px;
 transition: background .15s;
 }
 .lesson:hover { background: rgba(255,255,255,.025); }
-.ltext { flex: 1; }
-.lname { font-size: .8rem; font-weight: 500; line-height: 1.3; }
-.lsub  { font-size: .62rem; color: var(–muted); margin-top: 2px; line-height: 1.4; }
+.ltext { flex: 1; min-width: 0; }
+.lname { font-size: .79rem; font-weight: 500; line-height: 1.3; }
+.lsub  { font-size: .61rem; color: var(–muted); margin-top: 2px; line-height: 1.4; }
 .lesson.done .lname { color: var(–muted); text-decoration: line-through; text-decoration-color: rgba(78,90,122,.4); }
 
 .sbg { display: flex; gap: 4px; }
 .sb {
-width: 26px;
-height: 26px;
-border-radius: 7px;
+width: 28px; height: 28px; border-radius: 7px;
 border: 1.5px solid var(–border2);
-background: transparent;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: .65rem;
-color: var(–muted);
+background: transparent; cursor: pointer;
+display: flex; align-items: center; justify-content: center;
 transition: all .15s;
 }
-.sb:hover { border-color: var(–muted2); color: var(–text); transform: scale(1.05); }
-.sb.is-done { background: rgba(16,185,129,.15); border-color: var(–done); color: var(–done); }
-.sb.is-part { background: rgba(245,158,11,.12); border-color: var(–partial); color: var(–partial); }
+.sb svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; color: var(–muted); transition: color .15s; }
+.sb:hover { border-color: var(–muted2); transform: scale(1.05); }
+.sb:hover svg { color: var(–text); }
+.sb.is-done { background: rgba(16,185,129,.15); border-color: var(–done); }
+.sb.is-done svg { color: var(–done); }
+.sb.is-part { background: rgba(245,158,11,.12); border-color: var(–partial); }
+.sb.is-part svg { color: var(–partial); }
 
 .note {
-background: transparent;
-border: none;
-outline: none;
-color: var(–muted);
-font-family: ‘DM Sans’, sans-serif;
-font-size: .65rem;
-width: 70px;
-cursor: text;
+background: transparent; border: none; outline: none;
+color: var(–muted); font-family: ‘DM Sans’, sans-serif;
+font-size: .64rem; width: 64px; cursor: text;
 }
 .note::placeholder { color: rgba(78,90,122,.3); }
 .note:focus { color: var(–text); }
+@media (max-width: 480px) { .note { width: 42px; } .mini-bar, .btitle .sub { display: none; } }
 
-@media (max-width: 480px) { .note { width: 45px; } .mini-bar, .btitle .sub { display: none; } }
-
-/* ── SCHEDULE ── */
-.section-header {
-text-align: center;
-padding: 20px 16px 14px;
-}
+/* ── STATS PAGE ── */
+.section-header { text-align: center; padding: 20px 16px 14px; }
 .section-header h2 {
-font-family: ‘Syne’, sans-serif;
-font-size: 1.25rem;
-font-weight: 800;
-letter-spacing: -.02em;
+font-family: ‘Syne’, sans-serif; font-size: 1.2rem; font-weight: 800;
+letter-spacing: -.02em; display: flex; align-items: center; justify-content: center; gap: 8px;
 }
-.section-header p { font-size: .74rem; color: var(–muted2); margin-top: 4px; }
+.section-header h2 svg { width: 18px; height: 18px; stroke: var(–orange); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.section-header p { font-size: .73rem; color: var(–muted2); margin-top: 4px; }
 
-.day-tabs {
-display: flex;
-gap: 6px;
-margin-bottom: 14px;
-overflow-x: auto;
-padding-bottom: 4px;
-}
-.day-tabs::-webkit-scrollbar { height: 2px; }
-
-.dtab {
-flex-shrink: 0;
-padding: 7px 14px;
-border-radius: 99px;
-border: 1.5px solid var(–border);
-background: transparent;
-color: var(–muted);
-font-family: ‘Syne’, sans-serif;
-font-size: .72rem;
-font-weight: 700;
-cursor: pointer;
-transition: all .2s;
-letter-spacing: .03em;
-}
-.dtab.active { background: rgba(249,115,22,.12); border-color: var(–orange); color: var(–orange); }
-.dtab:hover:not(.active) { border-color: var(–border2); color: var(–muted2); }
-
-.sched-stats {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 8px;
-margin-bottom: 14px;
-}
-.stat-card {
-background: var(–card);
-border: 1px solid var(–border);
-border-radius: 13px;
-padding: 12px 10px;
-text-align: center;
-}
-.stat-num { font-family: ‘Syne’, sans-serif; font-size: 1.3rem; font-weight: 800; }
-.stat-num.green { color: var(–done); }
-.stat-num.orange { color: var(–orange); }
-.stat-num.blue { color: var(–phys); }
-.stat-lbl { font-size: .62rem; color: var(–muted); margin-top: 2px; }
-
-.session-card {
-background: var(–card);
-border: 1px solid var(–border);
-border-radius: 13px;
-padding: 13px 15px;
-margin-bottom: 8px;
-display: flex;
-align-items: center;
-gap: 12px;
-cursor: pointer;
-transition: all .2s;
-}
-.session-card:hover { border-color: var(–border2); transform: translateX(2px); }
-.session-card.done-s { background: rgba(16,185,129,.05); border-color: rgba(16,185,129,.2); }
-
-.session-time { text-align: center; flex-shrink: 0; min-width: 70px; }
-.session-time .t { font-family: ‘Syne’, sans-serif; font-size: .76rem; font-weight: 700; color: var(–orange); }
-.session-card.done-s .session-time .t { color: var(–done); }
-.session-time .dur { font-size: .6rem; color: var(–muted); margin-top: 2px; }
-
-.session-divider { width: 1px; height: 36px; background: var(–border); flex-shrink: 0; }
-
-.session-info { flex: 1; }
-.session-name { font-size: .84rem; font-weight: 600; }
-.session-sub  { font-size: .65rem; color: var(–muted); margin-top: 2px; }
-
-.session-check {
-width: 32px;
-height: 32px;
-border-radius: 99px;
-border: 2px solid var(–border2);
-background: transparent;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: .85rem;
-color: var(–muted);
-transition: all .2s;
-flex-shrink: 0;
-}
-.session-card.done-s .session-check { background: rgba(16,185,129,.2); border-color: var(–done); color: var(–done); }
-
-.no-sessions { text-align: center; padding: 36px 16px; color: var(–muted); font-size: .82rem; }
-
-.week-sum {
-background: var(–card);
-border: 1px solid var(–border);
-border-radius: 14px;
-padding: 14px 16px;
-margin-top: 14px;
-}
-.week-sum h3 { font-family: ‘Syne’, sans-serif; font-size: .72rem; font-weight: 700; color: var(–muted2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .08em; }
-
-.week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
-.wday { text-align: center; }
-.wday-name { font-size: .56rem; color: var(–muted); margin-bottom: 4px; font-family: ‘Syne’, sans-serif; text-transform: uppercase; }
-.wday-bar { height: 40px; background: var(–border); border-radius: 5px; overflow: hidden; position: relative; }
-.wday-fill { position: absolute; bottom: 0; left: 0; right: 0; background: var(–orange); border-radius: 5px; transition: height .5s cubic-bezier(.4,0,.2,1); }
-.wday-fill.full { background: var(–done); }
-.wday-pct { font-size: .56rem; color: var(–muted); margin-top: 3px; }
-
-/* ── STATS ── */
-.stats-grid {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 8px;
-margin-bottom: 12px;
-}
+.stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 12px; }
 .big-stat {
-background: var(–card);
-border: 1px solid var(–border);
-border-radius: 14px;
-padding: 16px 14px;
-text-align: center;
-position: relative;
-overflow: hidden;
-transition: transform .2s;
+background: var(–card); border: 1px solid var(–border);
+border-radius: 14px; padding: 16px 14px; text-align: center;
+position: relative; overflow: hidden; transition: transform .2s;
 }
 .big-stat:hover { transform: translateY(-1px); }
 .big-stat::before { content: ‘’; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; }
@@ -455,170 +334,151 @@ transition: transform .2s;
 .big-stat.o::before { background: var(–orange); }
 .big-stat.b::before { background: var(–phys); }
 .big-stat.p::before { background: var(–chem); }
-.big-stat .n { font-family: ‘Syne’, sans-serif; font-size: 2.2rem; font-weight: 800; }
-.big-stat .l { font-size: .68rem; color: var(–muted2); margin-top: 3px; }
+.big-stat .n { font-family: ‘Syne’, sans-serif; font-size: 2rem; font-weight: 800; }
+.big-stat .l { font-size: .66rem; color: var(–muted2); margin-top: 3px; }
 .big-stat.g .n { color: var(–done); }
 .big-stat.o .n { color: var(–orange); }
 .big-stat.b .n { color: var(–phys); }
 .big-stat.p .n { color: var(–chem); }
 
-.chart-wrap {
-background: var(–card);
-border: 1px solid var(–border);
-border-radius: 14px;
-padding: 16px;
-margin-bottom: 10px;
-}
-.chart-title { font-family: ‘Syne’, sans-serif; font-size: .68rem; font-weight: 700; color: var(–muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 14px; }
+.chart-wrap { background: var(–card); border: 1px solid var(–border); border-radius: 14px; padding: 16px; margin-bottom: 10px; }
+.chart-title { font-family: ‘Syne’, sans-serif; font-size: .65rem; font-weight: 700; color: var(–muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 14px; }
 
-.bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 110px; }
+.bar-chart { display: flex; align-items: flex-end; gap: 10px; height: 110px; }
 .bc-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; }
 .bc-bar { width: 100%; border-radius: 7px 7px 0 0; transition: height .6s cubic-bezier(.4,0,.2,1); min-height: 4px; }
-.bc-label { font-size: .6rem; color: var(–muted); text-align: center; }
-.bc-val { font-family: ‘Syne’, sans-serif; font-size: .64rem; font-weight: 700; text-align: center; }
+.bc-label { font-size: .59rem; color: var(–muted); text-align: center; }
+.bc-val { font-family: ‘Syne’, sans-serif; font-size: .63rem; font-weight: 700; text-align: center; }
 
 .subject-bars { background: var(–card); border: 1px solid var(–border); border-radius: 14px; padding: 16px; }
 .subj-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
 .subj-row:last-child { margin-bottom: 0; }
-.subj-name { font-size: .78rem; font-weight: 600; min-width: 90px; }
-.subj-bar-wrap { flex: 1; height: 8px; background: var(–border); border-radius: 99px; overflow: hidden; }
+.subj-name { font-size: .76rem; font-weight: 600; min-width: 80px; display: flex; align-items: center; gap: 5px; }
+.subj-name svg { width: 13px; height: 13px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.subj-bar-wrap { flex: 1; height: 7px; background: var(–border); border-radius: 99px; overflow: hidden; }
 .subj-bar-fill { height: 100%; border-radius: 99px; transition: width .6s cubic-bezier(.4,0,.2,1); }
 .subj-pct { font-family: ‘Syne’, sans-serif; font-size: .7rem; font-weight: 800; min-width: 36px; text-align: right; }
 
-/* ── TODO ── */
-.todo-add {
-display: flex;
-gap: 8px;
-margin-bottom: 12px;
+/* ── TÂCHES ── */
+.day-tabs {
+display: flex; gap: 6px; margin-bottom: 14px;
+overflow-x: auto; padding-bottom: 4px;
 }
+.day-tabs::-webkit-scrollbar { height: 2px; }
+.dtab {
+flex-shrink: 0; padding: 7px 13px; border-radius: 99px;
+border: 1.5px solid var(–border); background: transparent;
+color: var(–muted); font-family: ‘Syne’, sans-serif;
+font-size: .7rem; font-weight: 700; cursor: pointer;
+transition: all .2s; letter-spacing: .03em;
+}
+.dtab.active { background: rgba(249,115,22,.12); border-color: var(–orange); color: var(–orange); }
+.dtab:hover:not(.active) { border-color: var(–border2); color: var(–muted2); }
+
+.todo-add { display: flex; gap: 8px; margin-bottom: 12px; }
 .todo-input {
-flex: 1;
-background: var(–card);
-border: 1.5px solid var(–border);
-border-radius: 11px;
-padding: 11px 15px;
-color: var(–text);
-font-family: ‘DM Sans’, sans-serif;
-font-size: .83rem;
-outline: none;
-transition: border-color .2s;
+flex: 1; background: var(–card); border: 1.5px solid var(–border);
+border-radius: 11px; padding: 11px 15px; color: var(–text);
+font-family: ‘DM Sans’, sans-serif; font-size: .83rem;
+outline: none; transition: border-color .2s;
 }
 .todo-input:focus { border-color: var(–orange); }
 .todo-input::placeholder { color: var(–muted); }
 
 .todo-add-btn {
-background: var(–orange);
-border: none;
-border-radius: 11px;
-padding: 11px 18px;
-color: #fff;
-font-family: ‘Syne’, sans-serif;
-font-size: .8rem;
-font-weight: 700;
-cursor: pointer;
-transition: opacity .2s, transform .1s;
-letter-spacing: .03em;
+background: var(–orange); border: none; border-radius: 11px;
+padding: 11px 18px; color: #fff; font-family: ‘Syne’, sans-serif;
+font-size: .78rem; font-weight: 700; cursor: pointer;
+transition: opacity .2s, transform .1s; letter-spacing: .03em;
+white-space: nowrap;
 }
-.todo-add-btn:hover { opacity: .9; }
+.todo-add-btn:hover { opacity: .88; }
 .todo-add-btn:active { transform: scale(.97); }
 
 .todo-stats {
-background: var(–card);
-border: 1px solid var(–border);
-border-radius: 11px;
-padding: 11px 15px;
-display: flex;
-align-items: center;
-gap: 12px;
-margin-bottom: 12px;
+background: var(–card); border: 1px solid var(–border);
+border-radius: 11px; padding: 11px 15px;
+display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
 }
 .todo-prog { flex: 1; height: 5px; background: var(–border); border-radius: 99px; overflow: hidden; }
 .todo-prog-fill { height: 100%; background: var(–done); border-radius: 99px; transition: width .3s; }
 .todo-prog-lbl { font-size: .7rem; color: var(–muted2); white-space: nowrap; }
 
 .todo-item {
-background: var(–card);
-border: 1px solid var(–border);
-border-radius: 12px;
-padding: 12px 14px;
-margin-bottom: 7px;
-display: flex;
-align-items: center;
-gap: 10px;
-transition: all .2s;
+background: var(–card); border: 1px solid var(–border);
+border-radius: 12px; padding: 12px 14px; margin-bottom: 7px;
+display: flex; align-items: center; gap: 10px; transition: all .2s;
 }
 .todo-item:hover { border-color: var(–border2); }
 .todo-item.done-t { opacity: .55; }
 .todo-item.done-t .todo-text { text-decoration: line-through; color: var(–muted); }
 
 .todo-check {
-width: 24px;
-height: 24px;
-border-radius: 99px;
-border: 2px solid var(–border2);
-background: transparent;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: .72rem;
-color: transparent;
-transition: all .2s;
-flex-shrink: 0;
+width: 24px; height: 24px; border-radius: 99px;
+border: 2px solid var(–border2); background: transparent;
+cursor: pointer; display: flex; align-items: center; justify-content: center;
+transition: all .2s; flex-shrink: 0;
 }
-.todo-item.done-t .todo-check { background: rgba(16,185,129,.2); border-color: var(–done); color: var(–done); }
+.todo-check svg { width: 11px; height: 11px; stroke: transparent; fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; transition: stroke .2s; }
+.todo-item.done-t .todo-check { background: rgba(16,185,129,.2); border-color: var(–done); }
+.todo-item.done-t .todo-check svg { stroke: var(–done); }
 .todo-text { flex: 1; font-size: .83rem; }
 .todo-del {
-background: transparent;
-border: none;
-color: var(–muted);
-cursor: pointer;
-font-size: .78rem;
-padding: 4px 6px;
-border-radius: 6px;
-transition: all .15s;
+background: transparent; border: none; color: var(–muted);
+cursor: pointer; padding: 5px; border-radius: 6px; transition: all .15s;
+display: flex; align-items: center;
 }
+.todo-del svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; }
 .todo-del:hover { color: var(–red); background: rgba(239,68,68,.1); }
-
-.empty-todo { text-align: center; padding: 30px; color: var(–muted); font-size: .82rem; line-height: 1.8; }
-
-/* ── BADGE ── */
-.badge {
-display: inline-block;
-background: rgba(99,102,241,.12);
-border: 1px solid rgba(99,102,241,.2);
-color: #a5b4fc;
-font-family: ‘Syne’, sans-serif;
-font-size: .58rem;
-font-weight: 700;
-padding: 2px 7px;
-border-radius: 99px;
-margin-left: 6px;
-letter-spacing: .06em;
-text-transform: uppercase;
-}
+.empty-todo { text-align: center; padding: 30px; color: var(–muted); font-size: .82rem; line-height: 1.9; }
+.empty-todo svg { width: 28px; height: 28px; stroke: var(–muted); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 8px; }
 </style>
 
 </head>
 <body>
 
+<!-- ── SVG DEFS (hidden, reusable) ── -->
+
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="ic-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
+  <symbol id="ic-chart" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+  <symbol id="ic-task" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M7 17l2 2 4-4"/></symbol>
+  <symbol id="ic-grad" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+  <symbol id="ic-atom" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5z"/><path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5z"/></symbol>
+  <symbol id="ic-flask" viewBox="0 0 24 24"><path d="M9 3h6v10l3.4 6.8A1 1 0 0 1 17.5 21H6.5a1 1 0 0 1-.9-1.2L9 13V3z"/><line x1="9" y1="3" x2="15" y2="3"/><line x1="9" y1="9" x2="15" y2="9"/></symbol>
+  <symbol id="ic-math" viewBox="0 0 24 24"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
+  <symbol id="ic-dna" viewBox="0 0 24 24"><path d="M2 15c6.667-6 13.333 0 20-6M2 9c6.667 6 13.333 0 20 6M7 3.338A9.954 9.954 0 0 0 2 9"/><path d="M17 20.662A9.954 9.954 0 0 0 22 15"/><path d="M2 21c6.667-6 13.333 0 20-6"/><path d="M2 3c6.667 6 13.333 0 20 6"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="ic-refresh" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></symbol>
+  <symbol id="ic-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+  <symbol id="ic-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol>
+  <symbol id="ic-clipboard" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></symbol>
+</svg>
+
 <!-- ── TABS ── -->
 
 <div class="tabs">
-  <div class="tab active" onclick="showPage('lessons',this)">📚 Cours</div>
-  <div class="tab" onclick="showPage('schedule',this)">🗓️ Planning</div>
-  <div class="tab" onclick="showPage('stats',this)">📊 Statistiques</div>
-  <div class="tab" onclick="showPage('todo',this)">📝 Tâches</div>
+  <div class="tab active" onclick="showPage('lessons',this)">
+    <svg><use href="#ic-book"/></svg>Cours
+  </div>
+  <div class="tab" onclick="showPage('stats',this)">
+    <svg><use href="#ic-chart"/></svg>Statistiques
+  </div>
+  <div class="tab" onclick="showPage('todo',this)">
+    <svg><use href="#ic-task"/></svg>Tâches
+  </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     PAGE : COURS
-══════════════════════════════════════ -->
+<!-- ══════════════════════
+     COURS
+══════════════════════ -->
 
 <div class="page active" id="page-lessons">
-
   <div class="page-header">
-    <h1>🎓 Révision Baccalauréat</h1>
+    <h1>
+      <svg><use href="#ic-grad"/></svg>
+      Révision Baccalauréat
+    </h1>
     <p>Suivi de révision cours par cours</p>
   </div>
 
@@ -629,10 +489,30 @@ text-transform: uppercase;
   </div>
 
   <div class="overview">
-    <div class="ov phys"><div class="ico">⚛️</div><div class="lbl">Physique</div><div class="num" id="op-phys">0%</div><div class="cnt" id="oc-phys"></div></div>
-    <div class="ov chem"><div class="ico">🧪</div><div class="lbl">Chimie</div><div class="num" id="op-chem">0%</div><div class="cnt" id="oc-chem"></div></div>
-    <div class="ov math"><div class="ico">📐</div><div class="lbl">Maths</div><div class="num" id="op-math">0%</div><div class="cnt" id="oc-math"></div></div>
-    <div class="ov svt"><div class="ico">🧬</div><div class="lbl">SVT</div><div class="num" id="op-svt">0%</div><div class="cnt" id="oc-svt"></div></div>
+    <div class="ov phys">
+      <div class="ico"><svg><use href="#ic-atom"/></svg></div>
+      <div class="lbl">Physique</div>
+      <div class="num" id="op-phys">0%</div>
+      <div class="cnt" id="oc-phys"></div>
+    </div>
+    <div class="ov chem">
+      <div class="ico"><svg><use href="#ic-flask"/></svg></div>
+      <div class="lbl">Chimie</div>
+      <div class="num" id="op-chem">0%</div>
+      <div class="cnt" id="oc-chem"></div>
+    </div>
+    <div class="ov math">
+      <div class="ico"><svg><use href="#ic-math"/></svg></div>
+      <div class="lbl">Maths</div>
+      <div class="num" id="op-math">0%</div>
+      <div class="cnt" id="oc-math"></div>
+    </div>
+    <div class="ov svt">
+      <div class="ico"><svg><use href="#ic-dna"/></svg></div>
+      <div class="lbl">SVT</div>
+      <div class="num" id="op-svt">0%</div>
+      <div class="cnt" id="oc-svt"></div>
+    </div>
   </div>
 
   <div class="legend">
@@ -644,41 +524,19 @@ text-transform: uppercase;
   <div id="root"></div>
 </div>
 
-<!-- ══════════════════════════════════════
-     PAGE : PLANNING
-══════════════════════════════════════ -->
-
-<div class="page" id="page-schedule">
-  <div class="section-header">
-    <h2>🗓️ Planning de révision</h2>
-    <p>Suivez votre présence à chaque séance</p>
-  </div>
-  <div class="day-tabs" id="day-tabs"></div>
-  <div class="sched-stats">
-    <div class="stat-card"><div class="stat-num green" id="st-done">0</div><div class="stat-lbl">Complétées</div></div>
-    <div class="stat-card"><div class="stat-num orange" id="st-rem">0</div><div class="stat-lbl">Restantes</div></div>
-    <div class="stat-card"><div class="stat-num blue" id="st-hrs">0h</div><div class="stat-lbl">Heures révisées</div></div>
-  </div>
-  <div id="sessions-list"></div>
-  <div class="week-sum">
-    <h3>Résumé de la semaine</h3>
-    <div class="week-grid" id="week-grid"></div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════
-     PAGE : STATISTIQUES
-══════════════════════════════════════ -->
+<!-- ══════════════════════
+     STATISTIQUES
+══════════════════════ -->
 
 <div class="page" id="page-stats">
   <div class="section-header">
-    <h2>📊 Statistiques</h2>
+    <h2><svg><use href="#ic-chart"/></svg>Statistiques</h2>
     <p>Vue d'ensemble de votre progression</p>
   </div>
   <div class="stats-grid">
     <div class="big-stat g"><div class="n" id="st-total-done">0</div><div class="l">Cours terminés</div></div>
     <div class="big-stat o"><div class="n" id="st-total-rem">0</div><div class="l">Cours restants</div></div>
-    <div class="big-stat b"><div class="n" id="st-sess-done">0</div><div class="l">Séances complétées</div></div>
+    <div class="big-stat b"><div class="n" id="st-global-pct">0%</div><div class="l">Progression globale</div></div>
     <div class="big-stat p"><div class="n" id="st-todo-done">0</div><div class="l">Tâches accomplies</div></div>
   </div>
   <div class="chart-wrap">
@@ -690,13 +548,13 @@ text-transform: uppercase;
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     PAGE : TÂCHES
-══════════════════════════════════════ -->
+<!-- ══════════════════════
+     TÂCHES
+══════════════════════ -->
 
 <div class="page" id="page-todo">
   <div class="section-header">
-    <h2>📝 Tâches quotidiennes</h2>
+    <h2><svg><use href="#ic-clipboard"/></svg>Tâches quotidiennes</h2>
     <p>Organisez vos tâches jour par jour</p>
   </div>
   <div class="day-tabs" id="todo-day-tabs"></div>
@@ -708,304 +566,253 @@ text-transform: uppercase;
     <input class="todo-input" id="todo-input" placeholder="Ajouter une nouvelle tâche..." />
     <button class="todo-add-btn" onclick="addTodo()">+ Ajouter</button>
   </div>
-  <div class="todo-list" id="todo-list"></div>
+  <div id="todo-list"></div>
 </div>
 
-<!-- ══════════════════════════════════════
-     JAVASCRIPT
-══════════════════════════════════════ -->
-
 <script>
-// ════════════════════════════════════════
-// DATA – COURS (français)
-// ════════════════════════════════════════
-const LESSONS_DATA = [
+// ══════════════════════
+// DATA
+// ══════════════════════
+var LESSONS_DATA = [
   {
-    id: 'phys', label: 'Physique', sub: 'PC – Physique', icon: '⚛️',
-    chapters: [
-      {
-        title: 'Ondes', lessons: [
-          { name: 'Ondes mécaniques progressives', sub: 'Définition, célérité, retard temporel' },
-          { name: 'Ondes mécaniques progressives périodiques', sub: 'Périodicité temporelle et spatiale, diffraction' },
-          { name: 'Propagation d\'une onde lumineuse', sub: 'Nature ondulatoire, diffraction, dispersion par prisme' },
-        ]
-      },
-      {
-        title: 'Transformations nucléaires', lessons: [
-          { name: 'Radioactivité – décroissance radioactive', sub: 'Stabilité des noyaux, rayonnements α β γ, loi de décroissance' },
-          { name: 'Noyaux, masse et énergie', sub: 'Défaut de masse, énergie de liaison, fission et fusion' },
-        ]
-      },
-      {
-        title: 'Électricité', lessons: [
-          { name: 'Dipôle RC', sub: 'Charge et décharge du condensateur, constante de temps τ = RC' },
-          { name: 'Dipôle RL', sub: 'Établissement et rupture du courant dans la bobine, inductance L' },
-          { name: 'Oscillations d\'un circuit RLC série', sub: 'Oscillations libres, régimes d\'amortissement, entretien' },
-          { name: 'Modulation d\'amplitude (ampli opérationnel)', sub: 'Principe, détecteur d\'enveloppe, applications' },
-        ]
-      },
-      {
-        title: 'Mécanique', lessons: [
-          { name: 'Lois de Newton', sub: 'Vecteur vitesse et accélération, les trois lois' },
-          { name: 'Chute libre et chute avec frottement', sub: 'Chute verticale sans / avec résistance de l\'air' },
-          { name: 'Mouvements dans un plan', sub: 'Projectile en champ de pesanteur, particule chargée' },
-          { name: 'Satellites et planètes', sub: 'Trois lois de Kepler, mouvement circulaire uniforme' },
-          { name: 'Rotation d\'un solide', sub: 'Mouvement de rotation autour d\'un axe fixe' },
-          { name: 'Oscillateurs mécaniques', sub: 'Ressort, torsion, pendule pesant, pendule simple' },
-          { name: 'Aspects énergétiques des oscillateurs', sub: 'Énergie potentielle, cinétique, mécanique' },
-          { name: 'Mécanique newtonienne et atome', sub: 'Quantification de l\'énergie, spectre d\'émission, modèle de Bohr' },
-        ]
-      },
+    id:'phys', label:'Physique', sub:'PC – Physique', icon:'atom',
+    chapters:[
+      { title:'Ondes', lessons:[
+        {name:'Ondes mécaniques progressives', sub:'Définition, célérité, retard temporel'},
+        {name:'Ondes mécaniques progressives périodiques', sub:'Périodicité temporelle et spatiale, diffraction'},
+        {name:"Propagation d'une onde lumineuse", sub:'Nature ondulatoire, diffraction, dispersion par prisme'},
+      ]},
+      { title:'Transformations nucléaires', lessons:[
+        {name:'Radioactivité – décroissance radioactive', sub:'Stabilité des noyaux, rayonnements α β γ, loi de décroissance'},
+        {name:'Noyaux, masse et énergie', sub:'Défaut de masse, énergie de liaison, fission et fusion'},
+      ]},
+      { title:'Électricité', lessons:[
+        {name:'Dipôle RC', sub:'Charge et décharge du condensateur, constante de temps τ = RC'},
+        {name:'Dipôle RL', sub:'Établissement et rupture du courant dans la bobine, inductance L'},
+        {name:'Oscillations d\'un circuit RLC série', sub:'Oscillations libres, régimes d\'amortissement, entretien'},
+        {name:"Modulation d'amplitude", sub:'Principe, détecteur d\'enveloppe, applications'},
+      ]},
+      { title:'Mécanique', lessons:[
+        {name:'Lois de Newton', sub:'Vecteur vitesse et accélération, les trois lois'},
+        {name:'Chute libre et chute avec frottement', sub:"Chute verticale sans / avec résistance de l'air"},
+        {name:'Mouvements dans un plan', sub:'Projectile en champ de pesanteur, particule chargée'},
+        {name:'Satellites et planètes', sub:'Trois lois de Kepler, mouvement circulaire uniforme'},
+        {name:"Rotation d'un solide", sub:'Mouvement de rotation autour d\'un axe fixe'},
+        {name:'Oscillateurs mécaniques', sub:'Ressort, torsion, pendule pesant, pendule simple'},
+        {name:'Aspects énergétiques des oscillateurs', sub:'Énergie potentielle, cinétique, mécanique'},
+        {name:'Mécanique newtonienne et atome', sub:"Quantification de l'énergie, spectre d'émission, modèle de Bohr"},
+      ]},
     ]
   },
   {
-    id: 'chem', label: 'Chimie', sub: 'PC – Chimie', icon: '🧪',
-    chapters: [
-      {
-        title: 'Transformations cinétiques et équilibre', lessons: [
-          { name: 'Réactions rapides et lentes', sub: 'Facteurs cinétiques influençant la vitesse de réaction' },
-          { name: 'Suivi d\'une transformation chimique', sub: 'Vitesse volumique, temps de demi-réaction t½' },
-          { name: 'Transformations dans les deux sens', sub: 'Taux d\'avancement final τ, constante d\'équilibre K' },
-          { name: 'État d\'équilibre d\'un système chimique', sub: 'Quotient de réaction Qr, effet des conditions sur l\'équilibre' },
-          { name: 'Réactions acide-base', sub: 'Constante d\'acidité Ka, échelle de pH, calculs de pH' },
-          { name: 'Dosage acido-basique', sub: 'Détermination de la concentration inconnue, point d\'équivalence' },
-        ]
-      },
-      {
-        title: 'Sens d\'évolution des systèmes', lessons: [
-          { name: 'Évolution spontanée', sub: 'Critère d\'évolution spontanée : comparaison de Qr et K' },
-          { name: 'Piles électrochimiques', sub: 'Fonctionnement chimique, force électromotrice' },
-          { name: 'Transformations forcées (électrolyse)', sub: 'Principe de l\'électrolyse, applications' },
-          { name: 'Estérification et hydrolyse', sub: 'Propriétés, équilibre, contrôle de la vitesse et du rendement' },
-        ]
-      },
+    id:'chem', label:'Chimie', sub:'PC – Chimie', icon:'flask',
+    chapters:[
+      { title:'Transformations cinétiques et équilibre', lessons:[
+        {name:'Réactions rapides et lentes', sub:'Facteurs cinétiques influençant la vitesse de réaction'},
+        {name:"Suivi d'une transformation chimique", sub:'Vitesse volumique, temps de demi-réaction t½'},
+        {name:'Transformations dans les deux sens', sub:'Taux d\'avancement final τ, constante d\'équilibre K'},
+        {name:"État d'équilibre d'un système chimique", sub:'Quotient de réaction Qr, effet des conditions sur l\'équilibre'},
+        {name:'Réactions acide-base', sub:"Constante d'acidité Ka, échelle de pH, calculs de pH"},
+        {name:'Dosage acido-basique', sub:'Détermination de la concentration inconnue, point d\'équivalence'},
+      ]},
+      { title:"Sens d'évolution des systèmes", lessons:[
+        {name:'Évolution spontanée', sub:'Critère d\'évolution spontanée : comparaison de Qr et K'},
+        {name:'Piles électrochimiques', sub:'Fonctionnement chimique, force électromotrice'},
+        {name:'Transformations forcées (électrolyse)', sub:"Principe de l'électrolyse, applications"},
+        {name:'Estérification et hydrolyse', sub:'Propriétés, équilibre, contrôle de la vitesse et du rendement'},
+      ]},
     ]
   },
   {
-    id: 'math', label: 'Mathématiques', sub: 'Maths', icon: '📐',
-    chapters: [
-      {
-        title: 'Analyse', lessons: [
-          { name: 'Continuité', sub: 'Continuité sur un intervalle, TVI, fonctions réciproques' },
-          { name: 'Dérivation et étude de fonctions', sub: 'Applications de la dérivée, monotonie, tableau de variations' },
-          { name: 'Suites numériques', sub: 'Limites, convergence, suites u_{n+1} = f(u_n)' },
-          { name: 'Fonctions logarithmiques', sub: 'Fonction ln et log, propriétés et applications' },
-          { name: 'Fonctions exponentielles', sub: 'Fonction e^x, croissance et décroissance exponentielle' },
-          { name: 'Primitives et intégration', sub: 'Techniques de calcul intégral, aires et volumes' },
-          { name: 'Équations différentielles', sub: "Résolution de y'=ay+b et y''+ay'+by=0" },
-        ]
-      },
-      {
-        title: 'Algèbre, géométrie et probabilités', lessons: [
-          { name: 'Nombres complexes', sub: 'Forme algébrique, trigonométrique, exponentielle, applications géométriques' },
-          { name: 'Géométrie dans l\'espace', sub: 'Produit scalaire et vectoriel, droite, plan et sphère' },
-          { name: 'Calcul des probabilités', sub: 'Dénombrement, probabilité conditionnelle, variable aléatoire discrète' },
-        ]
-      },
+    id:'math', label:'Mathématiques', sub:'Maths', icon:'math',
+    chapters:[
+      { title:'Analyse', lessons:[
+        {name:'Continuité', sub:'Continuité sur un intervalle, TVI, fonctions réciproques'},
+        {name:'Dérivation et étude de fonctions', sub:'Applications de la dérivée, monotonie, tableau de variations'},
+        {name:'Suites numériques', sub:'Limites, convergence, suites u_{n+1} = f(u_n)'},
+        {name:'Fonctions logarithmiques', sub:'Fonction ln et log, propriétés et applications'},
+        {name:'Fonctions exponentielles', sub:"Fonction e^x, croissance et décroissance exponentielle"},
+        {name:'Primitives et intégration', sub:'Techniques de calcul intégral, aires et volumes'},
+        {name:'Équations différentielles', sub:"Résolution de y'=ay+b et y''+ay'+by=0"},
+      ]},
+      { title:'Algèbre, géométrie et probabilités', lessons:[
+        {name:'Nombres complexes', sub:'Forme algébrique, trigonométrique, exponentielle, applications géométriques'},
+        {name:"Géométrie dans l'espace", sub:'Produit scalaire et vectoriel, droite, plan et sphère'},
+        {name:'Calcul des probabilités', sub:'Dénombrement, probabilité conditionnelle, variable aléatoire discrète'},
+      ]},
     ]
   },
   {
-    id: 'svt', label: 'SVT', sub: 'Sciences de la Vie et de la Terre', icon: '🧬',
-    chapters: [
-      {
-        title: 'Unités du programme', lessons: [
-          { name: 'Énergie cellulaire', sub: 'Respiration cellulaire et fermentation, régénération de l\'ATP, contraction musculaire' },
-          { name: 'Génétique moléculaire', sub: 'Nature de l\'information génétique, expression protéique, génie génétique' },
-          { name: 'Reproduction sexuée et transmission des caractères', sub: 'Méiose et fécondation, lois de Mendel' },
-          { name: 'Environnement et pollution', sub: 'Pollution air / eau / sol, déchets, énergie nucléaire' },
-          { name: 'Géologie interne', sub: 'Tectonique des plaques, chaînes de montagnes, roches métamorphiques et granitiques' },
-        ]
-      },
+    id:'svt', label:'SVT', sub:'Sciences de la Vie et de la Terre', icon:'dna',
+    chapters:[
+      { title:'Unités du programme', lessons:[
+        {name:'Énergie cellulaire', sub:"Respiration cellulaire et fermentation, régénération de l'ATP, contraction musculaire"},
+        {name:'Génétique moléculaire', sub:"Nature de l'information génétique, expression protéique, génie génétique"},
+        {name:'Reproduction sexuée et transmission des caractères', sub:'Méiose et fécondation, lois de Mendel'},
+        {name:'Environnement et pollution', sub:'Pollution air / eau / sol, déchets, énergie nucléaire'},
+        {name:'Géologie interne', sub:'Tectonique des plaques, chaînes de montagnes, roches métamorphiques et granitiques'},
+      ]},
     ]
   },
 ];
 
-// ════════════════════════════════════════
-// DATA – PLANNING (français)
-// ════════════════════════════════════════
-const DAYS = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
-const DAYS_SHORT = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+var DAYS = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+var SUBJ_COLORS = {phys:'#38bdf8', chem:'#c084fc', math:'#fb7185', svt:'#34d399'};
+var SUBJ_LABELS = {phys:'Physique', chem:'Chimie', math:'Maths', svt:'SVT'};
+var SUBJ_ICONS  = {phys:'ic-atom', chem:'ic-flask', math:'ic-math', svt:'ic-dna'};
 
-const SCHEDULE = {
-  'Lundi': [
-    { id: 'mon1', time: '19h30 – 22h00', dur: '2h30', name: 'Révision Mathématiques', sub: 'Révision générale en mathématiques', mins: 150 }
-  ],
-  'Mardi': [
-    { id: 'tue1', time: '19h30 – 22h00', dur: '2h30', name: 'Révision Mathématiques', sub: 'Révision générale en mathématiques', mins: 150 }
-  ],
-  'Mercredi': [
-    { id: 'wed1', time: '16h00 – 18h00', dur: '2h', name: 'Révision Mathématiques', sub: 'Révision après l\'école', mins: 120 },
-    { id: 'wed2', time: '19h30 – 22h00', dur: '2h30', name: 'Anglais + Philosophie / Maths', sub: 'Révision mixte', mins: 150 },
-    { id: 'wed3', time: '20h30 – 22h30', dur: '2h', name: 'Maths – séance intensive', sub: 'Approfondissement en mathématiques', mins: 120 },
-  ],
-  'Jeudi': [
-    { id: 'thu1', time: '19h30 – 22h00', dur: '2h30', name: 'Révision Mathématiques', sub: 'Révision générale en mathématiques', mins: 150 }
-  ],
-  'Vendredi': [
-    { id: 'fri1', time: '16h00 – 18h00', dur: '2h', name: 'Révision Physique-Chimie', sub: 'Révision Physique', mins: 120 },
-    { id: 'fri2', time: '19h30 – 22h00', dur: '2h30', name: 'Révision Mathématiques', sub: 'Révision générale en mathématiques', mins: 150 },
-  ],
-  'Samedi': [
-    { id: 'sat1', time: '16h00 – 18h00', dur: '2h', name: 'Révision Physique-Chimie', sub: 'Révision Physique', mins: 120 },
-    { id: 'sat2', time: '19h30 – 22h00', dur: '2h30', name: 'SVT + Mathématiques', sub: 'Révision SVT puis Mathématiques', mins: 150 },
-  ],
-  'Dimanche': [
-    { id: 'sun1', time: '10h25 – 11h10', dur: '45min', name: 'Révision Mathématiques', sub: 'Séance du matin', mins: 45 },
-    { id: 'sun2', time: '11h15 – 12h00', dur: '45min', name: 'Révision Physique-Chimie', sub: 'Séance du matin', mins: 45 },
-    { id: 'sun3', time: '12h30 – 13h15', dur: '45min', name: 'Révision Mathématiques', sub: 'Séance de midi', mins: 45 },
-    { id: 'sun4', time: '16h00 – 18h00', dur: '2h', name: 'Maths – révision intensive', sub: 'Séance d\'après-midi', mins: 120 },
-    { id: 'sun5', time: '19h30 – 22h00', dur: '2h30', name: 'Physique-Chimie / Maths', sub: 'Séance du soir', mins: 150 },
-  ],
-};
-
-const SUBJ_COLORS = { phys: '#38bdf8', chem: '#c084fc', math: '#fb7185', svt: '#34d399' };
-const SUBJ_LABELS = { phys: 'Physique', chem: 'Chimie', math: 'Maths', svt: 'SVT' };
-
-// ════════════════════════════════════════
+// ══════════════════════
 // STATE
-// ════════════════════════════════════════
-const ST = JSON.parse(localStorage.getItem('bac_fr_st') || '{}');
-function save() { localStorage.setItem('bac_fr_st', JSON.stringify(ST)); }
-function lid(sid, ci, li) { return `${sid}_${ci}_${li}`; }
+// ══════════════════════
+var ST = JSON.parse(localStorage.getItem('bac_v2_st') || '{}');
+function save() { try { localStorage.setItem('bac_v2_st', JSON.stringify(ST)); } catch(e){} }
+function lid(sid,ci,li) { return sid+'_'+ci+'_'+li; }
 function gst(id) { return ST[id] || 'todo'; }
-function sst(id, v) { ST[id] = v; save(); refreshLessons(); }
-function gss(id) { return ST['s_' + id] || false; }
-function sss(id, v) { ST['s_' + id] = v; save(); }
+function sst(id,v) { ST[id]=v; save(); refreshLessons(); }
 
-// ════════════════════════════════════════
+// ══════════════════════
 // TABS
-// ════════════════════════════════════════
+// ══════════════════════
 function showPage(p, el) {
-  document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-  document.getElementById('page-' + p).classList.add('active');
+  document.querySelectorAll('.page').forEach(function(x){x.classList.remove('active');});
+  document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
+  document.getElementById('page-'+p).classList.add('active');
   el.classList.add('active');
-  if (p === 'schedule') renderSchedule();
   if (p === 'stats') renderStats();
-  if (p === 'todo') renderTodo();
+  if (p === 'todo')  renderTodo();
 }
 
-// ════════════════════════════════════════
+// ══════════════════════
 // COURS
-// ════════════════════════════════════════
+// ══════════════════════
 function calcPct(sid) {
-  const s = LESSONS_DATA.find(x => x.id === sid);
-  let tot = 0, val = 0;
-  s.chapters.forEach((c, ci) => c.lessons.forEach((_, li) => {
-    const st = gst(lid(sid, ci, li)); tot++;
-    if (st === 'done') val++; else if (st === 'part') val += .5;
-  }));
-  return tot ? Math.round(val / tot * 100) : 0;
+  var s = LESSONS_DATA.filter(function(x){return x.id===sid;})[0];
+  var tot=0, val=0;
+  s.chapters.forEach(function(c,ci){
+    c.lessons.forEach(function(_,li){
+      var st=gst(lid(sid,ci,li)); tot++;
+      if(st==='done') val++; else if(st==='part') val+=.5;
+    });
+  });
+  return tot ? Math.round(val/tot*100) : 0;
 }
 
 function calcCounts(sid) {
-  const s = LESSONS_DATA.find(x => x.id === sid);
-  let tot = 0, done = 0;
-  s.chapters.forEach((c, ci) => c.lessons.forEach((_, li) => {
-    tot++; if (gst(lid(sid, ci, li)) === 'done') done++;
-  }));
-  return { tot, done };
+  var s = LESSONS_DATA.filter(function(x){return x.id===sid;})[0];
+  var tot=0, done=0;
+  s.chapters.forEach(function(c,ci){
+    c.lessons.forEach(function(_,li){
+      tot++; if(gst(lid(sid,ci,li))==='done') done++;
+    });
+  });
+  return {tot:tot, done:done};
 }
 
 function refreshLessons() {
-  let gtot = 0, gval = 0;
-  LESSONS_DATA.forEach(s => {
-    const p = calcPct(s.id);
-    const { tot, done } = calcCounts(s.id);
-    const el  = document.getElementById('op-' + s.id);
-    const mf  = document.getElementById('mf-' + s.id);
-    const mp  = document.getElementById('mp-' + s.id);
-    const oc  = document.getElementById('oc-' + s.id);
-    if (el)  el.textContent  = p + '%';
-    if (mf)  mf.style.width  = p + '%';
-    if (mp)  mp.textContent  = p + '%';
-    if (oc)  oc.textContent  = done + ' / ' + tot + ' cours';
-    s.chapters.forEach((c, ci) => c.lessons.forEach((_, li) => {
-      const id = lid(s.id, ci, li);
-      const st = gst(id); gtot++;
-      if (st === 'done') gval++; else if (st === 'part') gval += .5;
-      const row = document.getElementById('r-' + id);
-      const db  = document.getElementById('db-' + id);
-      const pb  = document.getElementById('pb-' + id);
-      if (row) row.classList.toggle('done', st === 'done');
-      if (db)  db.classList.toggle('is-done', st === 'done');
-      if (pb)  pb.classList.toggle('is-part', st === 'part');
-    }));
+  var gtot=0, gval=0;
+  LESSONS_DATA.forEach(function(s){
+    var p = calcPct(s.id);
+    var cc = calcCounts(s.id);
+    var el=document.getElementById('op-'+s.id);
+    var mf=document.getElementById('mf-'+s.id);
+    var mp=document.getElementById('mp-'+s.id);
+    var oc=document.getElementById('oc-'+s.id);
+    if(el) el.textContent=p+'%';
+    if(mf) mf.style.width=p+'%';
+    if(mp) mp.textContent=p+'%';
+    if(oc) oc.textContent=cc.done+' / '+cc.tot+' cours';
+    s.chapters.forEach(function(c,ci){
+      c.lessons.forEach(function(_,li){
+        var id=lid(s.id,ci,li);
+        var st=gst(id); gtot++;
+        if(st==='done') gval++; else if(st==='part') gval+=.5;
+        var row=document.getElementById('r-'+id);
+        var db=document.getElementById('db-'+id);
+        var pb=document.getElementById('pb-'+id);
+        if(row) row.classList.toggle('done', st==='done');
+        if(db)  db.classList.toggle('is-done', st==='done');
+        if(pb)  pb.classList.toggle('is-part', st==='part');
+      });
+    });
   });
-  const gp = gtot ? Math.round(gval / gtot * 100) : 0;
-  document.getElementById('gfill').style.width = gp + '%';
-  document.getElementById('gpct').textContent = gp + '%';
+  var gp = gtot ? Math.round(gval/gtot*100) : 0;
+  document.getElementById('gfill').style.width=gp+'%';
+  document.getElementById('gpct').textContent=gp+'%';
 }
 
 function buildLessons() {
-  const root = document.getElementById('root');
-  LESSONS_DATA.forEach(s => {
-    const block = document.createElement('div');
-    block.className = `block ${s.id}`;
+  var root = document.getElementById('root');
+  LESSONS_DATA.forEach(function(s){
+    var block = document.createElement('div');
+    block.className = 'block '+s.id;
 
-    const head = document.createElement('div');
+    var head = document.createElement('div');
     head.className = 'block-head';
-    head.innerHTML = `
-      <div class="bico">${s.icon}</div>
-      <div class="btitle">
-        <div class="main">${s.label}</div>
-        <div class="sub">${s.sub}</div>
-      </div>
-      <div class="mini-bar"><div class="mini-fill" id="mf-${s.id}" style="width:0%"></div></div>
-      <div class="mini-pct" id="mp-${s.id}">0%</div>
-      <div class="chv open" id="chv-${s.id}">▼</div>
-    `;
+    head.innerHTML =
+      '<div class="bico"><svg><use href="#ic-'+s.icon+'"/></svg></div>'+
+      '<div class="btitle">'+
+        '<div class="main">'+s.label+'</div>'+
+        '<div class="sub">'+s.sub+'</div>'+
+      '</div>'+
+      '<div class="mini-bar"><div class="mini-fill" id="mf-'+s.id+'" style="width:0%"></div></div>'+
+      '<div class="mini-pct" id="mp-'+s.id+'">0%</div>'+
+      '<div class="chv open" id="chv-'+s.id+'"><svg><use href="#ic-chevron"/></svg></div>';
 
-    const body = document.createElement('div');
-    body.id = 'body-' + s.id;
+    var body = document.createElement('div');
+    body.id = 'body-'+s.id;
 
-    head.addEventListener('click', () => {
-      const b = document.getElementById('body-' + s.id);
-      const c = document.getElementById('chv-' + s.id);
-      const hidden = b.style.display === 'none';
-      b.style.display = hidden ? '' : 'none';
-      c.classList.toggle('open', hidden);
-    });
+    (function(sid, bodyEl){
+      head.addEventListener('click', function(){
+        var b = document.getElementById('body-'+sid);
+        var c = document.getElementById('chv-'+sid);
+        var hidden = b.style.display === 'none';
+        b.style.display = hidden ? '' : 'none';
+        c.classList.toggle('open', hidden);
+      });
+    })(s.id, body);
 
-    s.chapters.forEach((ch, ci) => {
-      const cw = document.createElement('div');
+    s.chapters.forEach(function(ch, ci){
+      var cw = document.createElement('div');
       cw.className = 'chap-wrap';
-      const ct = document.createElement('div');
+      var ct = document.createElement('div');
       ct.className = 'ch-t';
       ct.textContent = ch.title;
       cw.appendChild(ct);
 
-      ch.lessons.forEach((les, li) => {
-        const id  = lid(s.id, ci, li);
-        const nk  = 'n_' + id;
-        const note = (ST[nk] || '').replace(/"/g, '&quot;');
+      ch.lessons.forEach(function(les, li){
+        var id  = lid(s.id, ci, li);
+        var nk  = 'n_'+id;
+        var noteVal = (ST[nk]||'').replace(/"/g,'&quot;');
 
-        const row = document.createElement('div');
+        var row = document.createElement('div');
         row.className = 'lesson';
-        row.id = 'r-' + id;
-        row.innerHTML = `
-          <div class="ltext">
-            <div class="lname">${les.name}</div>
-            <div class="lsub">${les.sub}</div>
-          </div>
-          <input class="note" placeholder="Note..." value="${note}" id="ni-${id}" />
-          <div class="sbg">
-            <button class="sb" id="pb-${id}" title="En cours">⟳</button>
-            <button class="sb" id="db-${id}" title="Terminé">✓</button>
-          </div>
-        `;
-        row.querySelector('#db-' + id).addEventListener('click', e => {
-          e.stopPropagation();
-          sst(id, gst(id) === 'done' ? 'todo' : 'done');
-        });
-        row.querySelector('#pb-' + id).addEventListener('click', e => {
-          e.stopPropagation();
-          sst(id, gst(id) === 'part' ? 'todo' : 'part');
-        });
-        row.querySelector('#ni-' + id).addEventListener('input', e => {
-          ST[nk] = e.target.value; save();
-        });
-        row.querySelector('#ni-' + id).addEventListener('click', e => e.stopPropagation());
+        row.id = 'r-'+id;
+        row.innerHTML =
+          '<div class="ltext">'+
+            '<div class="lname">'+les.name+'</div>'+
+            '<div class="lsub">'+les.sub+'</div>'+
+          '</div>'+
+          '<input class="note" placeholder="Note..." value="'+noteVal+'" id="ni-'+id+'" />'+
+          '<div class="sbg">'+
+            '<button class="sb" id="pb-'+id+'" title="En cours"><svg><use href="#ic-refresh"/></svg></button>'+
+            '<button class="sb" id="db-'+id+'" title="Terminé"><svg><use href="#ic-check"/></svg></button>'+
+          '</div>';
+
+        (function(rowId, noteKey){
+          row.querySelector('#db-'+rowId).addEventListener('click', function(e){
+            e.stopPropagation();
+            sst(rowId, gst(rowId)==='done'?'todo':'done');
+          });
+          row.querySelector('#pb-'+rowId).addEventListener('click', function(e){
+            e.stopPropagation();
+            sst(rowId, gst(rowId)==='part'?'todo':'part');
+          });
+          row.querySelector('#ni-'+rowId).addEventListener('input', function(e){
+            ST[noteKey]=e.target.value; save();
+          });
+          row.querySelector('#ni-'+rowId).addEventListener('click', function(e){ e.stopPropagation(); });
+        })(id, nk);
+
         cw.appendChild(row);
       });
       body.appendChild(cw);
@@ -1017,226 +824,156 @@ function buildLessons() {
   });
 }
 
-// ════════════════════════════════════════
-// PLANNING
-// ════════════════════════════════════════
-let activeDay = DAYS[new Date().getDay()];
-
-function buildDayTabs() {
-  const cont = document.getElementById('day-tabs');
-  DAYS.forEach(d => {
-    const btn = document.createElement('button');
-    btn.className = 'dtab' + (d === activeDay ? ' active' : '');
-    btn.textContent = d;
-    btn.addEventListener('click', () => {
-      activeDay = d;
-      document.querySelectorAll('#day-tabs .dtab').forEach(x => x.classList.remove('active'));
-      btn.classList.add('active');
-      renderSessions();
-    });
-    cont.appendChild(btn);
-  });
-}
-
-function renderSchedule() { renderSessions(); renderWeekGrid(); }
-
-function renderSessions() {
-  const list = document.getElementById('sessions-list');
-  list.innerHTML = '';
-  const sessions = SCHEDULE[activeDay] || [];
-
-  if (!sessions.length) {
-    list.innerHTML = '<div class="no-sessions">🌙 Aucune séance de révision ce jour-là</div>';
-  } else {
-    sessions.forEach(s => {
-      const done = gss(activeDay + '_' + s.id);
-      const card = document.createElement('div');
-      card.className = 'session-card' + (done ? ' done-s' : '');
-      card.innerHTML = `
-        <div class="session-time">
-          <div class="t">${s.time}</div>
-          <div class="dur">${s.dur}</div>
-        </div>
-        <div class="session-divider"></div>
-        <div class="session-info">
-          <div class="session-name">${s.name}</div>
-          <div class="session-sub">${s.sub}</div>
-        </div>
-        <button class="session-check" id="sc-${s.id}">${done ? '✓' : '○'}</button>
-      `;
-      card.querySelector('#sc-' + s.id).addEventListener('click', e => {
-        e.stopPropagation();
-        sss(activeDay + '_' + s.id, !gss(activeDay + '_' + s.id));
-        renderSessions();
-        renderWeekGrid();
-      });
-      list.appendChild(card);
-    });
-  }
-
-  const done    = sessions.filter(s => gss(activeDay + '_' + s.id));
-  const doneMin = done.reduce((a, s) => a + s.mins, 0);
-  document.getElementById('st-done').textContent = done.length;
-  document.getElementById('st-rem').textContent  = sessions.length - done.length;
-  const h = Math.floor(doneMin / 60), m = doneMin % 60;
-  document.getElementById('st-hrs').textContent  =
-    h > 0 ? (m > 0 ? h + 'h' + m + 'm' : h + 'h') : (m ? m + 'm' : '0m');
-}
-
-function renderWeekGrid() {
-  const grid = document.getElementById('week-grid');
-  grid.innerHTML = '';
-  DAYS.forEach((d, i) => {
-    const sessions = SCHEDULE[d] || [];
-    const tot  = sessions.length;
-    const done = sessions.filter(s => gss(d + '_' + s.id)).length;
-    const pct  = tot ? Math.round(done / tot * 100) : 0;
-    const col  = document.createElement('div');
-    col.className = 'wday';
-    col.innerHTML = `
-      <div class="wday-name">${DAYS_SHORT[i]}</div>
-      <div class="wday-bar"><div class="wday-fill${pct === 100 ? ' full' : ''}" style="height:${pct}%"></div></div>
-      <div class="wday-pct">${tot ? pct + '%' : '—'}</div>
-    `;
-    grid.appendChild(col);
-  });
-}
-
-// ════════════════════════════════════════
+// ══════════════════════
 // STATISTIQUES
-// ════════════════════════════════════════
+// ══════════════════════
 function renderStats() {
-  let totalDone = 0, totalRem = 0;
-  LESSONS_DATA.forEach(s => {
-    const { tot, done } = calcCounts(s.id);
-    totalDone += done; totalRem += (tot - done);
+  var totalDone=0, totalRem=0;
+  LESSONS_DATA.forEach(function(s){
+    var cc = calcCounts(s.id);
+    totalDone += cc.done; totalRem += (cc.tot - cc.done);
   });
   document.getElementById('st-total-done').textContent = totalDone;
   document.getElementById('st-total-rem').textContent  = totalRem;
 
-  let sessDone = 0;
-  DAYS.forEach(d => { (SCHEDULE[d] || []).forEach(s => { if (gss(d + '_' + s.id)) sessDone++; }); });
-  document.getElementById('st-sess-done').textContent = sessDone;
+  var gtot=0, gval=0;
+  LESSONS_DATA.forEach(function(s){
+    var p=calcPct(s.id); var cc=calcCounts(s.id);
+    gtot+=cc.tot;
+    gval+=cc.done;
+  });
+  var gp = gtot ? Math.round(gval/gtot*100) : 0;
+  document.getElementById('st-global-pct').textContent = gp+'%';
 
-  const allTodos = ST['todos'] || {};
-  let tdDone = 0;
-  Object.values(allTodos).forEach(arr => arr.forEach(t => { if (t.done) tdDone++; }));
+  var allTodos = ST['todos'] || {};
+  var tdDone=0;
+  Object.keys(allTodos).forEach(function(k){
+    allTodos[k].forEach(function(t){ if(t.done) tdDone++; });
+  });
   document.getElementById('st-todo-done').textContent = tdDone;
 
   // Bar chart
-  const chart = document.getElementById('bar-chart');
+  var chart = document.getElementById('bar-chart');
   chart.innerHTML = '';
-  LESSONS_DATA.forEach(s => {
-    const p = calcPct(s.id);
-    const wrap = document.createElement('div');
+  LESSONS_DATA.forEach(function(s){
+    var p = calcPct(s.id);
+    var wrap = document.createElement('div');
     wrap.className = 'bc-bar-wrap';
-    wrap.innerHTML = `
-      <div class="bc-val" style="color:${SUBJ_COLORS[s.id]}">${p}%</div>
-      <div class="bc-bar" style="height:${Math.max(p, 4)}px;background:${SUBJ_COLORS[s.id]};opacity:.85"></div>
-      <div class="bc-label">${SUBJ_LABELS[s.id]}</div>
-    `;
+    wrap.innerHTML =
+      '<div class="bc-val" style="color:'+SUBJ_COLORS[s.id]+'">'+p+'%</div>'+
+      '<div class="bc-bar" style="height:'+Math.max(p,4)+'px;background:'+SUBJ_COLORS[s.id]+';opacity:.85"></div>'+
+      '<div class="bc-label">'+SUBJ_LABELS[s.id]+'</div>';
     chart.appendChild(wrap);
   });
 
-  // Subject detail bars
-  const sb = document.getElementById('subj-bars');
+  // Subject detail
+  var sb = document.getElementById('subj-bars');
   sb.innerHTML = '<div class="chart-title">Détail par matière</div>';
-  LESSONS_DATA.forEach(s => {
-    const p = calcPct(s.id);
-    const { tot, done } = calcCounts(s.id);
-    const row = document.createElement('div');
+  LESSONS_DATA.forEach(function(s){
+    var p = calcPct(s.id);
+    var cc = calcCounts(s.id);
+    var row = document.createElement('div');
     row.className = 'subj-row';
-    row.innerHTML = `
-      <div class="subj-name" style="color:${SUBJ_COLORS[s.id]}">${s.icon} ${SUBJ_LABELS[s.id]}</div>
-      <div class="subj-bar-wrap"><div class="subj-bar-fill" style="width:${p}%;background:${SUBJ_COLORS[s.id]}"></div></div>
-      <div class="subj-pct" style="color:${SUBJ_COLORS[s.id]}">${p}%</div>
-    `;
+    row.innerHTML =
+      '<div class="subj-name" style="color:'+SUBJ_COLORS[s.id]+'">'+
+        '<svg style="stroke:'+SUBJ_COLORS[s.id]+'"><use href="#'+SUBJ_ICONS[s.id]+'"/></svg>'+
+        SUBJ_LABELS[s.id]+
+      '</div>'+
+      '<div class="subj-bar-wrap"><div class="subj-bar-fill" style="width:'+p+'%;background:'+SUBJ_COLORS[s.id]+'"></div></div>'+
+      '<div class="subj-pct" style="color:'+SUBJ_COLORS[s.id]+'">'+p+'%</div>';
     sb.appendChild(row);
-    const sub2 = document.createElement('div');
-    sub2.style.cssText = 'font-size:.62rem;color:var(--muted);margin:-6px 0 10px 0;padding-left:90px;';
-    sub2.textContent = done + ' cours terminé' + (done > 1 ? 's' : '') + ' sur ' + tot;
+    var sub2 = document.createElement('div');
+    sub2.style.cssText = 'font-size:.6rem;color:var(--muted);margin:-6px 0 12px 0;padding-left:85px;';
+    sub2.textContent = cc.done+' cours terminé'+(cc.done>1?'s':'')+' sur '+cc.tot;
     sb.appendChild(sub2);
   });
 }
 
-// ════════════════════════════════════════
+// ══════════════════════
 // TÂCHES
-// ════════════════════════════════════════
-let activeTodoDay = DAYS[new Date().getDay()];
+// ══════════════════════
+var activeTodoDay = DAYS[new Date().getDay()];
 
 function buildTodoDayTabs() {
-  const cont = document.getElementById('todo-day-tabs');
-  DAYS.forEach(d => {
-    const btn = document.createElement('button');
-    btn.className = 'dtab' + (d === activeTodoDay ? ' active' : '');
+  var cont = document.getElementById('todo-day-tabs');
+  DAYS.forEach(function(d){
+    var btn = document.createElement('button');
+    btn.className = 'dtab'+(d===activeTodoDay?' active':'');
     btn.textContent = d;
-    btn.addEventListener('click', () => {
-      activeTodoDay = d;
-      document.querySelectorAll('#todo-day-tabs .dtab').forEach(x => x.classList.remove('active'));
-      btn.classList.add('active');
-      renderTodoList();
-    });
+    (function(day, b){
+      b.addEventListener('click', function(){
+        activeTodoDay = day;
+        document.querySelectorAll('#todo-day-tabs .dtab').forEach(function(x){x.classList.remove('active');});
+        b.classList.add('active');
+        renderTodoList();
+      });
+    })(d, btn);
     cont.appendChild(btn);
   });
 }
 
-function getTodos() { const t = ST['todos'] || {}; return t[activeTodoDay] || []; }
-function saveTodos(arr) { if (!ST['todos']) ST['todos'] = {}; ST['todos'][activeTodoDay] = arr; save(); }
+function getTodos() { var t=ST['todos']||{}; return t[activeTodoDay]||[]; }
+function saveTodos(arr) { if(!ST['todos']) ST['todos']={}; ST['todos'][activeTodoDay]=arr; save(); }
 
 function addTodo() {
-  const inp = document.getElementById('todo-input');
-  const txt = inp.value.trim();
-  if (!txt) return;
-  const todos = getTodos();
-  todos.push({ id: Date.now(), text: txt, done: false });
-  saveTodos(todos);
-  inp.value = '';
-  renderTodoList();
+  var inp = document.getElementById('todo-input');
+  var txt = inp.value.trim();
+  if(!txt) return;
+  var todos = getTodos();
+  todos.push({id:Date.now(), text:txt, done:false});
+  saveTodos(todos); inp.value=''; renderTodoList();
 }
 
 function renderTodo() { renderTodoList(); }
 
 function renderTodoList() {
-  const list = document.getElementById('todo-list');
+  var list = document.getElementById('todo-list');
   list.innerHTML = '';
-  const todos = getTodos();
+  var todos = getTodos();
 
-  if (!todos.length) {
-    list.innerHTML = '<div class="empty-todo">📋 Aucune tâche pour ce jour<br>Ajoutez-en une ci-dessus ↑</div>';
+  if(!todos.length){
+    list.innerHTML =
+      '<div class="empty-todo">'+
+        '<svg><use href="#ic-clipboard"/></svg><br>'+
+        'Aucune tâche pour ce jour<br>Ajoutez-en une ci-dessus ↑'+
+      '</div>';
   } else {
-    todos.forEach((t, i) => {
-      const item = document.createElement('div');
-      item.className = 'todo-item' + (t.done ? ' done-t' : '');
-      item.innerHTML = `
-        <button class="todo-check" id="tc-${t.id}">${t.done ? '✓' : ''}</button>
-        <div class="todo-text">${t.text}</div>
-        <button class="todo-del" id="td-${t.id}">✕</button>
-      `;
-      item.querySelector('#tc-' + t.id).addEventListener('click', () => {
-        const todos2 = getTodos(); todos2[i].done = !todos2[i].done; saveTodos(todos2); renderTodoList();
-      });
-      item.querySelector('#td-' + t.id).addEventListener('click', () => {
-        const todos2 = getTodos(); todos2.splice(i, 1); saveTodos(todos2); renderTodoList();
-      });
+    todos.forEach(function(t, i){
+      var item = document.createElement('div');
+      item.className = 'todo-item'+(t.done?' done-t':'');
+      item.innerHTML =
+        '<button class="todo-check" id="tc-'+t.id+'">'+
+          '<svg><use href="#ic-check"/></svg>'+
+        '</button>'+
+        '<div class="todo-text">'+t.text+'</div>'+
+        '<button class="todo-del" id="td-'+t.id+'"><svg><use href="#ic-x"/></svg></button>';
+
+      (function(idx){
+        item.querySelector('#tc-'+t.id).addEventListener('click', function(){
+          var todos2=getTodos(); todos2[idx].done=!todos2[idx].done; saveTodos(todos2); renderTodoList();
+        });
+        item.querySelector('#td-'+t.id).addEventListener('click', function(){
+          var todos2=getTodos(); todos2.splice(idx,1); saveTodos(todos2); renderTodoList();
+        });
+      })(i);
+
       list.appendChild(item);
     });
   }
 
-  const done = todos.filter(t => t.done).length;
-  const pct  = todos.length ? Math.round(done / todos.length * 100) : 0;
-  document.getElementById('todo-lbl').textContent = done + ' / ' + todos.length + ' tâche' + (todos.length > 1 ? 's' : '');
-  document.getElementById('todo-prog-fill').style.width = pct + '%';
+  var done = todos.filter(function(t){return t.done;}).length;
+  var pct  = todos.length ? Math.round(done/todos.length*100) : 0;
+  document.getElementById('todo-lbl').textContent = done+' / '+todos.length+' tâche'+(todos.length>1?'s':'');
+  document.getElementById('todo-prog-fill').style.width = pct+'%';
 }
 
-// Enter key
-document.getElementById('todo-input').addEventListener('keydown', e => { if (e.key === 'Enter') addTodo(); });
+document.getElementById('todo-input').addEventListener('keydown', function(e){ if(e.key==='Enter') addTodo(); });
 
-// ════════════════════════════════════════
+// ══════════════════════
 // INIT
-// ════════════════════════════════════════
+// ══════════════════════
 buildLessons();
 refreshLessons();
-buildDayTabs();
 buildTodoDayTabs();
 </script>
 
