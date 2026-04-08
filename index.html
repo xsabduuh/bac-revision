@@ -2,7 +2,7 @@
 <html lang="fr" dir="ltr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Révision Bac – Tracker Pro</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -11,25 +11,25 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* منع تحديد النص في العناصر العادية، مع استثناء الحقول */
-  user-select: none;
 }
 
-input, textarea, [contenteditable] {
-  user-select: text;
-}
-
+/* Empêcher la sélection et le menu contextuel (copie longue pression) */
 body {
   font-family: 'Inter', sans-serif;
   background: #0a0c15;
   color: #f1f5f9;
   min-height: 100vh;
   padding-bottom: 40px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
-/* منع التكبير التلقائي على الحقول */
-input, textarea, select, button {
-  font-size: 16px;
+/* Autoriser la sélection dans les champs de saisie */
+input, textarea, [contenteditable="true"] {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
 }
 
 /* Glass morphism effect */
@@ -488,7 +488,7 @@ input, textarea, select, button {
   padding: 10px 16px;
   color: #e2e8f0;
   font-family: inherit;
-  font-size: 16px; /* منع التكبير */
+  font-size: 16px; /* Empêche le zoom automatique sur iOS */
   width: 240px;
 }
 
@@ -505,6 +505,7 @@ input, textarea, select, button {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
+  font-size: 0.9rem;
 }
 
 .add-todo button:hover {
@@ -668,6 +669,7 @@ input, textarea, select, button {
   
   .add-todo input {
     width: 100%;
+    font-size: 16px;
   }
 }
 
@@ -803,14 +805,11 @@ input, textarea, select, button {
 </div>
 
 <script>
-// منع القائمة المنبثقة بالضغط المطول (نسخ)
+// Désactiver le menu contextuel (copie longue pression)
 document.addEventListener('contextmenu', function(e) {
   e.preventDefault();
   return false;
 });
-
-// منع تحديد النص عبر السحب أو الضغط المطول على العناصر غير القابلة للكتابة
-// لكن الحقول تبقى قابلة للتحديد (user-select: text تم ضبطها في CSS)
 
 // Données des cours
 const LESSONS_DATA = [
@@ -925,30 +924,30 @@ function setLessonNote(key, note) {
   saveStorage();
 }
 
-// تحديث واجهة درس واحد فقط دون إعادة بناء الكل
+// Mise à jour visuelle d'un seul élément de leçon
 function updateLessonUI(key, status) {
-  const lessonItem = document.querySelector(`.lesson-item[data-key="${key}"]`);
-  if (lessonItem) {
-    const lessonName = lessonItem.querySelector('.lesson-name');
-    if (lessonName) {
-      if (status === 'done') {
-        lessonName.style.textDecoration = 'line-through';
-        lessonName.style.color = '#64748b';
-      } else {
-        lessonName.style.textDecoration = 'none';
-        lessonName.style.color = '';
-      }
+  const lessonDiv = document.querySelector(`.lesson-item[data-key="${key}"]`);
+  if (!lessonDiv) return;
+  const lessonName = lessonDiv.querySelector('.lesson-name');
+  const doneBtn = lessonDiv.querySelector('.status-btn[data-status="done"]');
+  const partialBtn = lessonDiv.querySelector('.status-btn[data-status="partial"]');
+  
+  if (lessonName) {
+    if (status === 'done') {
+      lessonName.style.textDecoration = 'line-through';
+      lessonName.style.color = '#64748b';
+    } else {
+      lessonName.style.textDecoration = 'none';
+      lessonName.style.color = '';
     }
-    const doneBtn = lessonItem.querySelector('.status-btn:last-child');
-    const partialBtn = lessonItem.querySelector('.status-btn:first-child');
-    if (doneBtn) {
-      if (status === 'done') doneBtn.classList.add('done');
-      else doneBtn.classList.remove('done');
-    }
-    if (partialBtn) {
-      if (status === 'partial') partialBtn.classList.add('partial');
-      else partialBtn.classList.remove('partial');
-    }
+  }
+  if (doneBtn) {
+    if (status === 'done') doneBtn.classList.add('done');
+    else doneBtn.classList.remove('done');
+  }
+  if (partialBtn) {
+    if (status === 'partial') partialBtn.classList.add('partial');
+    else partialBtn.classList.remove('partial');
   }
 }
 
@@ -1042,7 +1041,7 @@ function getCompletedTodosCount() {
   return getTodos().filter(t => t.completed).length;
 }
 
-// Rendu des cours (avec data-key pour mise à jour sélective)
+// Rendu des cours
 function renderLessons() {
   const grid = document.getElementById('subjectsGrid');
   grid.innerHTML = '';
@@ -1050,7 +1049,6 @@ function renderLessons() {
   LESSONS_DATA.forEach(subject => {
     const card = document.createElement('div');
     card.className = 'subject-card';
-    
     const progress = getSubjectProgress(subject.id);
     const isOpen = openSubjects[subject.id] !== false;
     
@@ -1104,17 +1102,15 @@ function renderLessons() {
     grid.appendChild(card);
   });
   
-  // Attacher les événements après rendu
+  // Attacher les événements
   document.querySelectorAll('.subject-header').forEach(header => {
     header.removeEventListener('click', headerClickHandler);
     header.addEventListener('click', headerClickHandler);
   });
-  
   document.querySelectorAll('.status-btn').forEach(btn => {
     btn.removeEventListener('click', statusBtnHandler);
     btn.addEventListener('click', statusBtnHandler);
   });
-  
   document.querySelectorAll('.note-input').forEach(input => {
     input.removeEventListener('change', noteChangeHandler);
     input.addEventListener('change', noteChangeHandler);
@@ -1127,7 +1123,8 @@ function headerClickHandler(e) {
   const body = document.getElementById(`body-${subjId}`);
   const chevron = document.getElementById(`chevron-${subjId}`);
   if (body && chevron) {
-    if (body.classList.contains('open')) {
+    const isOpen = body.classList.contains('open');
+    if (isOpen) {
       body.classList.remove('open');
       chevron.classList.remove('open');
       openSubjects[subjId] = false;
@@ -1173,7 +1170,6 @@ function renderStats() {
   document.getElementById('todoDone').textContent = completedTodos;
   document.getElementById('completionRate').textContent = completionRate + '%';
   
-  // Bar chart
   const chart = document.getElementById('barChart');
   chart.innerHTML = '';
   LESSONS_DATA.forEach(subject => {
@@ -1189,16 +1185,13 @@ function renderStats() {
   });
 }
 
-// Rendu des tâches
 function renderTodoList() {
   const container = document.getElementById('todoList');
   const todos = getTodos();
-  
   if (todos.length === 0) {
     container.innerHTML = '<div class="empty-todo"><i class="fas fa-check-circle"></i> Aucune tâche pour le moment<br>Ajoutez-en une ci-dessus</div>';
     return;
   }
-  
   container.innerHTML = todos.map(todo => `
     <div class="todo-item">
       <button class="todo-check ${todo.completed ? 'completed' : ''}" onclick="toggleTodo(${todo.id})">
@@ -1219,7 +1212,6 @@ function escapeHtml(text) {
 }
 
 function refreshAll() {
-  // Mettre à jour les pourcentages des cartes de statistiques
   const physPct = getSubjectProgress('phys');
   const chemPct = getSubjectProgress('chem');
   const mathPct = getSubjectProgress('math');
@@ -1234,7 +1226,7 @@ function refreshAll() {
   document.getElementById('globalPercent').textContent = global + '%';
   document.getElementById('globalBar').style.width = global + '%';
   
-  // Mettre à jour les pourcentages dans les cartes des matières
+  // Mettre à jour les pourcentages dans les cartes
   document.querySelectorAll('.subject-card').forEach((card, idx) => {
     const subjects = ['phys', 'chem', 'math', 'svt'];
     const subjId = subjects[idx];
@@ -1254,12 +1246,11 @@ window.showPage = function(page, btn) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById(`page-${page}`).classList.add('active');
   btn.classList.add('active');
-  
   if (page === 'stats') renderStats();
   if (page === 'todo') renderTodoList();
 };
 
-// Fonctions globales nécessaires pour les onclick
+// Exposer les fonctions globales
 window.toggleTodo = toggleTodo;
 window.deleteTodo = deleteTodo;
 window.addTodo = addTodo;
