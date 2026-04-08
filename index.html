@@ -463,17 +463,19 @@ input, textarea, [contenteditable="true"] {
   transform: scale(1.05);
 }
 
-/* تعديل ألوان الأزرار عند التفعيل لتكون واضحة */
+/* تعديل واضح ومتباين لألوان الأزرار النشطة */
 .status-btn.done {
-  background: rgba(200, 130, 240, 0.4);  /* أرجواني فاتح شفاف */
-  border-color: #f0a0e0;                /* حدود وردية زاهية */
-  color: #ffe0f0;                       /* أيقونة بيضاء مائلة للوردي */
+  background: rgba(80, 220, 150, 0.35);  /* أخضر نعناعي شفاف */
+  border-color: #2ecc71;                /* حدود خضراء زاهية */
+  color: #e8fff0;                       /* أيقونة بيضاء مخضرة */
+  box-shadow: 0 0 8px rgba(46, 204, 113, 0.3);
 }
 
 .status-btn.partial {
-  background: rgba(230, 170, 200, 0.35); /* خوخي شفاف */
-  border-color: #f5b0d0;                /* حدود وردية فاتحة */
-  color: #ffd0e0;                       /* أيقونة وردية دافئة */
+  background: rgba(255, 180, 80, 0.35);  /* برتقالي شفاف */
+  border-color: #f39c12;                /* حدود برتقالية زاهية */
+  color: #fff5e0;                       /* أيقونة بيضاء مائلة للبرتقالي */
+  box-shadow: 0 0 8px rgba(243, 156, 18, 0.3);
 }
 
 .lesson-name[style*="line-through"] {
