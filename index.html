@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Révision Bac – Tracker Pro</title>
+<title>✨ Mon Cœur Révise ✨</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
@@ -13,16 +13,49 @@
   box-sizing: border-box;
 }
 
-/* Empêcher la sélection et le menu contextuel (copie longue pression) */
+/* خلفية رومانسية متدرجة مع قلوب متحركة */
 body {
   font-family: 'Inter', sans-serif;
-  background: #0a0c15;
-  color: #f1f5f9;
+  background: linear-gradient(145deg, #2d1b2e 0%, #4a2c3f 40%, #6b3a4a 70%, #8b4a5c 100%);
+  background-attachment: fixed;
+  color: #fce4ec;
   min-height: 100vh;
   padding-bottom: 40px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* قلوب عائمة في الخلفية */
+body::before {
+  content: '❤️ 💕 💗 💖 💘 💝';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 24px;
+  color: rgba(255, 200, 220, 0.08);
+  white-space: pre-wrap;
+  word-break: break-all;
+  pointer-events: none;
+  z-index: 0;
+  animation: floatHearts 40s infinite alternate ease-in-out;
+  padding: 30px;
+  line-height: 2;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@keyframes floatHearts {
+  0% { transform: translateY(0px) rotate(0deg); opacity: 0.05; }
+  50% { transform: translateY(-20px) rotate(5deg); opacity: 0.12; }
+  100% { transform: translateY(10px) rotate(-3deg); opacity: 0.08; }
 }
 
 /* Autoriser la sélection dans les champs de saisie */
@@ -32,11 +65,11 @@ input, textarea, [contenteditable="true"] {
   -webkit-touch-callout: default;
 }
 
-/* Glass morphism effect */
+/* Glass morphism effect - plus romantique */
 .glass {
-  background: rgba(18, 22, 35, 0.8);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(66, 78, 110, 0.3);
+  background: rgba(60, 30, 45, 0.5);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 180, 200, 0.25);
 }
 
 /* Layout */
@@ -44,6 +77,8 @@ input, textarea, [contenteditable="true"] {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px 24px;
+  position: relative;
+  z-index: 2;
 }
 
 /* Header */
@@ -51,11 +86,13 @@ input, textarea, [contenteditable="true"] {
   text-align: center;
   margin-bottom: 32px;
   padding: 32px 20px;
-  background: linear-gradient(135deg, #0f1222 0%, #1a1f35 100%);
+  background: linear-gradient(135deg, rgba(90, 40, 60, 0.7) 0%, rgba(130, 60, 80, 0.6) 100%);
+  backdrop-filter: blur(8px);
   border-radius: 28px;
-  border: 1px solid rgba(79, 92, 130, 0.4);
+  border: 1px solid rgba(255, 180, 200, 0.4);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 200, 220, 0.1) inset;
 }
 
 .header::before {
@@ -65,34 +102,36 @@ input, textarea, [contenteditable="true"] {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+  background: linear-gradient(90deg, #ff9a9e, #fecfef, #ffb7c5);
 }
 
 .header h1 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #fff, #94a3f8);
+  background: linear-gradient(135deg, #ffeef2, #ffd6e0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 8px;
+  text-shadow: 0 2px 10px rgba(255, 120, 160, 0.3);
 }
 
 .header p {
-  color: #94a3b8;
-  font-size: 0.85rem;
+  color: #f8d5e0;
+  font-size: 0.9rem;
+  font-style: italic;
 }
 
 /* Tabs Navigation */
 .tabs {
   display: flex;
   gap: 12px;
-  background: rgba(15, 18, 30, 0.9);
-  backdrop-filter: blur(12px);
+  background: rgba(50, 25, 40, 0.7);
+  backdrop-filter: blur(16px);
   padding: 8px;
   border-radius: 60px;
   margin-bottom: 28px;
-  border: 1px solid rgba(66, 78, 110, 0.4);
+  border: 1px solid rgba(255, 160, 190, 0.4);
 }
 
 .tab {
@@ -101,7 +140,7 @@ input, textarea, [contenteditable="true"] {
   text-align: center;
   font-weight: 600;
   font-size: 0.9rem;
-  color: #94a3b8;
+  color: #f0c0d0;
   cursor: pointer;
   border-radius: 50px;
   transition: all 0.3s ease;
@@ -119,14 +158,14 @@ input, textarea, [contenteditable="true"] {
 }
 
 .tab:hover {
-  color: #e2e8f0;
-  background: rgba(59, 130, 246, 0.1);
+  color: #ffeef2;
+  background: rgba(255, 140, 180, 0.2);
 }
 
 .tab.active {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, #ff8a9e, #e57399);
   color: white;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(230, 100, 140, 0.4);
 }
 
 /* Pages */
@@ -146,12 +185,13 @@ input, textarea, [contenteditable="true"] {
 
 /* Progress Card */
 .progress-card {
-  background: linear-gradient(135deg, #111827, #0f172a);
+  background: linear-gradient(135deg, rgba(70, 35, 50, 0.7), rgba(90, 45, 60, 0.6));
+  backdrop-filter: blur(8px);
   border-radius: 24px;
   padding: 24px;
   margin-bottom: 24px;
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 160, 190, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .progress-header {
@@ -165,7 +205,7 @@ input, textarea, [contenteditable="true"] {
 
 .progress-title {
   font-weight: 600;
-  color: #94a3b8;
+  color: #f8d5e0;
   letter-spacing: 1px;
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -174,14 +214,14 @@ input, textarea, [contenteditable="true"] {
 .progress-percent {
   font-size: 2rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, #ffb7c5, #ff8aae);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .bar-container {
-  background: rgba(30, 41, 59, 0.6);
+  background: rgba(80, 40, 55, 0.5);
   border-radius: 99px;
   height: 10px;
   overflow: hidden;
@@ -190,11 +230,12 @@ input, textarea, [contenteditable="true"] {
 
 .bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+  background: linear-gradient(90deg, #ff9a9e, #ffb7c5, #ff8aae);
   border-radius: 99px;
   transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 10px #ff8aae88;
 }
 
 .bar-fill::after {
@@ -204,7 +245,7 @@ input, textarea, [contenteditable="true"] {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
   animation: shimmer 2s infinite;
 }
 
@@ -222,34 +263,35 @@ input, textarea, [contenteditable="true"] {
 }
 
 .stat-card {
-  background: rgba(18, 22, 35, 0.8);
+  background: rgba(70, 35, 50, 0.6);
   backdrop-filter: blur(8px);
   border-radius: 20px;
   padding: 20px;
   text-align: center;
-  border: 1px solid rgba(66, 78, 110, 0.3);
+  border: 1px solid rgba(255, 160, 190, 0.3);
   transition: all 0.3s ease;
 }
 
 .stat-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(59, 130, 246, 0.5);
+  border-color: rgba(255, 140, 180, 0.6);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .stat-icon {
   font-size: 2rem;
   margin-bottom: 12px;
+  color: #ffb7c5;
 }
 
 .stat-number {
   font-size: 2rem;
   font-weight: 800;
-  color: #f1f5f9;
+  color: #fce4ec;
 }
 
 .stat-label {
-  color: #94a3b8;
+  color: #e0b0c0;
   font-size: 0.75rem;
   margin-top: 4px;
 }
@@ -263,22 +305,23 @@ input, textarea, [contenteditable="true"] {
 }
 
 .subject-card {
-  background: rgba(18, 22, 35, 0.8);
+  background: rgba(60, 30, 45, 0.6);
   backdrop-filter: blur(8px);
   border-radius: 20px;
-  border: 1px solid rgba(66, 78, 110, 0.3);
+  border: 1px solid rgba(255, 160, 190, 0.3);
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
 .subject-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(59, 130, 246, 0.4);
+  border-color: rgba(255, 140, 180, 0.5);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
 .subject-header {
   padding: 20px;
-  border-bottom: 1px solid rgba(66, 78, 110, 0.3);
+  border-bottom: 1px solid rgba(255, 160, 190, 0.2);
   display: flex;
   align-items: center;
   gap: 14px;
@@ -287,7 +330,7 @@ input, textarea, [contenteditable="true"] {
 }
 
 .subject-header:hover {
-  background: rgba(59, 130, 246, 0.05);
+  background: rgba(255, 140, 180, 0.1);
 }
 
 .subject-icon {
@@ -300,10 +343,10 @@ input, textarea, [contenteditable="true"] {
   font-size: 1.5rem;
 }
 
-.subject-icon.phys { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
-.subject-icon.chem { background: rgba(139, 92, 246, 0.15); color: #a78bfa; }
-.subject-icon.math { background: rgba(236, 72, 153, 0.15); color: #f472b6; }
-.subject-icon.svt { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+.subject-icon.phys { background: rgba(255, 160, 180, 0.2); color: #ffb0c0; }
+.subject-icon.chem { background: rgba(230, 140, 170, 0.2); color: #e090b0; }
+.subject-icon.math { background: rgba(255, 140, 160, 0.2); color: #ffa0b0; }
+.subject-icon.svt { background: rgba(210, 130, 160, 0.2); color: #d0a0b0; }
 
 .subject-info {
   flex: 1;
@@ -313,11 +356,12 @@ input, textarea, [contenteditable="true"] {
   font-weight: 700;
   font-size: 1.1rem;
   margin-bottom: 4px;
+  color: #ffe0e8;
 }
 
 .subject-sub {
   font-size: 0.7rem;
-  color: #94a3b8;
+  color: #e0b0c0;
 }
 
 .subject-progress {
@@ -325,13 +369,13 @@ input, textarea, [contenteditable="true"] {
   font-size: 0.9rem;
 }
 
-.subject-progress.phys { color: #60a5fa; }
-.subject-progress.chem { color: #a78bfa; }
-.subject-progress.math { color: #f472b6; }
-.subject-progress.svt { color: #34d399; }
+.subject-progress.phys { color: #ffb0c0; }
+.subject-progress.chem { color: #e090b0; }
+.subject-progress.math { color: #ffa0b0; }
+.subject-progress.svt { color: #d0a0b0; }
 
 .chevron {
-  color: #64748b;
+  color: #d0a0b0;
   transition: transform 0.3s;
 }
 
@@ -356,7 +400,7 @@ input, textarea, [contenteditable="true"] {
 .chapter-title {
   font-weight: 600;
   font-size: 0.75rem;
-  color: #94a3b8;
+  color: #f0c0d0;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 12px;
@@ -364,15 +408,17 @@ input, textarea, [contenteditable="true"] {
 }
 
 .lesson-item {
-  background: rgba(30, 41, 59, 0.4);
+  background: rgba(80, 40, 55, 0.4);
   border-radius: 12px;
   padding: 12px;
   margin-bottom: 8px;
   transition: all 0.2s;
+  border: 1px solid transparent;
 }
 
 .lesson-item:hover {
-  background: rgba(59, 130, 246, 0.1);
+  background: rgba(255, 140, 180, 0.15);
+  border-color: rgba(255, 180, 200, 0.2);
 }
 
 .lesson-header {
@@ -389,11 +435,12 @@ input, textarea, [contenteditable="true"] {
   font-weight: 500;
   font-size: 0.85rem;
   margin-bottom: 4px;
+  color: #ffe0e8;
 }
 
 .lesson-sub {
   font-size: 0.7rem;
-  color: #94a3b8;
+  color: #d0a0b0;
 }
 
 .lesson-actions {
@@ -406,11 +453,11 @@ input, textarea, [contenteditable="true"] {
   width: 32px;
   height: 32px;
   border-radius: 10px;
-  border: 1.5px solid rgba(66, 78, 110, 0.5);
+  border: 1.5px solid rgba(255, 160, 190, 0.5);
   background: transparent;
   cursor: pointer;
   transition: all 0.2s;
-  color: #64748b;
+  color: #d0a0b0;
   font-size: 0.8rem;
 }
 
@@ -419,23 +466,23 @@ input, textarea, [contenteditable="true"] {
 }
 
 .status-btn.done {
-  background: rgba(16, 185, 129, 0.2);
-  border-color: #10b981;
-  color: #10b981;
+  background: rgba(200, 120, 150, 0.3);
+  border-color: #e090a0;
+  color: #f8d0e0;
 }
 
 .status-btn.partial {
-  background: rgba(245, 158, 11, 0.2);
-  border-color: #f59e0b;
-  color: #f59e0b;
+  background: rgba(230, 160, 120, 0.2);
+  border-color: #e0a080;
+  color: #f0c0a0;
 }
 
 .note-input {
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(66, 78, 110, 0.5);
+  background: rgba(60, 30, 45, 0.7);
+  border: 1px solid rgba(255, 160, 190, 0.4);
   border-radius: 8px;
   padding: 6px 10px;
-  color: #e2e8f0;
+  color: #f0d0e0;
   font-size: 0.7rem;
   width: 90px;
   font-family: inherit;
@@ -443,16 +490,16 @@ input, textarea, [contenteditable="true"] {
 
 .note-input:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: #ff90a0;
 }
 
 /* Todo Section */
 .todo-section {
-  background: rgba(18, 22, 35, 0.8);
+  background: rgba(60, 30, 45, 0.6);
   backdrop-filter: blur(8px);
   border-radius: 24px;
   padding: 24px;
-  border: 1px solid rgba(66, 78, 110, 0.3);
+  border: 1px solid rgba(255, 160, 190, 0.3);
 }
 
 .todo-header {
@@ -467,17 +514,18 @@ input, textarea, [contenteditable="true"] {
 .todo-title h3 {
   font-size: 1.2rem;
   font-weight: 600;
+  color: #ffe0e8;
 }
 
 .todo-title p {
   font-size: 0.7rem;
-  color: #94a3b8;
+  color: #e0b0c0;
 }
 
 .add-todo {
   display: flex;
   gap: 12px;
-  background: rgba(30, 41, 59, 0.6);
+  background: rgba(80, 40, 55, 0.6);
   padding: 4px;
   border-radius: 60px;
 }
@@ -486,10 +534,14 @@ input, textarea, [contenteditable="true"] {
   background: transparent;
   border: none;
   padding: 10px 16px;
-  color: #e2e8f0;
+  color: #f0d0e0;
   font-family: inherit;
-  font-size: 16px; /* Empêche le zoom automatique sur iOS */
+  font-size: 16px;
   width: 240px;
+}
+
+.add-todo input::placeholder {
+  color: #c0a0b0;
 }
 
 .add-todo input:focus {
@@ -497,7 +549,7 @@ input, textarea, [contenteditable="true"] {
 }
 
 .add-todo button {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, #ff9a9e, #e57399);
   border: none;
   padding: 10px 24px;
   border-radius: 50px;
@@ -506,6 +558,7 @@ input, textarea, [contenteditable="true"] {
   cursor: pointer;
   transition: all 0.2s;
   font-size: 0.9rem;
+  box-shadow: 0 4px 10px rgba(200, 80, 120, 0.3);
 }
 
 .add-todo button:hover {
@@ -522,21 +575,21 @@ input, textarea, [contenteditable="true"] {
   align-items: center;
   gap: 12px;
   padding: 12px;
-  background: rgba(30, 41, 59, 0.4);
+  background: rgba(80, 40, 55, 0.4);
   border-radius: 12px;
   margin-bottom: 8px;
   transition: all 0.2s;
 }
 
 .todo-item:hover {
-  background: rgba(59, 130, 246, 0.1);
+  background: rgba(255, 140, 180, 0.15);
 }
 
 .todo-check {
   width: 24px;
   height: 24px;
   border-radius: 8px;
-  border: 2px solid rgba(66, 78, 110, 0.6);
+  border: 2px solid rgba(255, 160, 190, 0.6);
   background: transparent;
   cursor: pointer;
   display: flex;
@@ -547,25 +600,26 @@ input, textarea, [contenteditable="true"] {
 }
 
 .todo-check.completed {
-  background: rgba(16, 185, 129, 0.2);
-  border-color: #10b981;
-  color: #10b981;
+  background: rgba(200, 120, 150, 0.3);
+  border-color: #e090a0;
+  color: #f8d0e0;
 }
 
 .todo-text {
   flex: 1;
   font-size: 0.85rem;
+  color: #f0d0e0;
 }
 
 .todo-text.completed {
   text-decoration: line-through;
-  color: #64748b;
+  color: #b090a0;
 }
 
 .todo-delete {
   background: transparent;
   border: none;
-  color: #64748b;
+  color: #c090a0;
   cursor: pointer;
   padding: 6px;
   border-radius: 6px;
@@ -573,23 +627,23 @@ input, textarea, [contenteditable="true"] {
 }
 
 .todo-delete:hover {
-  color: #ef4444;
-  background: rgba(239, 68, 68, 0.1);
+  color: #ffb0c0;
+  background: rgba(200, 100, 130, 0.2);
 }
 
 .empty-todo {
   text-align: center;
   padding: 48px;
-  color: #64748b;
+  color: #c0a0b0;
 }
 
 /* Stats Page */
 .stats-container {
-  background: rgba(18, 22, 35, 0.8);
+  background: rgba(60, 30, 45, 0.6);
   backdrop-filter: blur(8px);
   border-radius: 24px;
   padding: 24px;
-  border: 1px solid rgba(66, 78, 110, 0.3);
+  border: 1px solid rgba(255, 160, 190, 0.3);
 }
 
 .chart-container {
@@ -598,7 +652,7 @@ input, textarea, [contenteditable="true"] {
 
 .chart-title {
   font-weight: 600;
-  color: #94a3b8;
+  color: #f0c0d0;
   margin-bottom: 16px;
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -622,11 +676,12 @@ input, textarea, [contenteditable="true"] {
 
 .bar {
   width: 100%;
-  background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(180deg, #ff9a9e, #e57399);
   border-radius: 8px 8px 4px 4px;
   transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 10px #e5739988;
 }
 
 .bar::after {
@@ -636,7 +691,7 @@ input, textarea, [contenteditable="true"] {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg, rgba(255,255,255,0.1), transparent);
+  background: linear-gradient(180deg, rgba(255,255,255,0.2), transparent);
 }
 
 /* Responsive */
@@ -680,16 +735,16 @@ input, textarea, [contenteditable="true"] {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1e293b;
+  background: #4a2c3f;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #475569;
+  background: #b08090;
   border-radius: 99px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b82f6;
+  background: #e090a0;
 }
 </style>
 </head>
@@ -697,8 +752,8 @@ input, textarea, [contenteditable="true"] {
 
 <div class="container">
   <div class="header">
-    <h1><i class="fas fa-graduation-cap"></i> Révision Baccalauréat</h1>
-    <p>Suivez votre progression et atteignez vos objectifs</p>
+    <h1><i class="fas fa-heart"></i> Mon Cœur Révise <i class="fas fa-heart"></i></h1>
+    <p>✨ Chaque leçon est un pas vers ton rêve, ma douce ✨</p>
   </div>
 
   <div class="tabs">
@@ -718,7 +773,7 @@ input, textarea, [contenteditable="true"] {
     <div class="progress-card">
       <div class="progress-header">
         <div class="progress-title">
-          <i class="fas fa-chart-simple"></i> Progression globale
+          <i class="fas fa-star"></i> Progression de mon cœur <i class="fas fa-star"></i>
         </div>
         <div class="progress-percent" id="globalPercent">0%</div>
       </div>
@@ -791,8 +846,8 @@ input, textarea, [contenteditable="true"] {
     <div class="todo-section">
       <div class="todo-header">
         <div class="todo-title">
-          <h3><i class="fas fa-list-check"></i> Tâches quotidiennes</h3>
-          <p>Organisez vos révisions jour par jour</p>
+          <h3><i class="fas fa-list-check"></i> Nos petits défis quotidiens</h3>
+          <p>Ce qu'on va accomplir ensemble aujourd'hui</p>
         </div>
         <div class="add-todo">
           <input type="text" id="todoInput" placeholder="Nouvelle tâche...">
@@ -814,7 +869,7 @@ document.addEventListener('contextmenu', function(e) {
 // Données des cours
 const LESSONS_DATA = [
   {
-    id: 'phys', name: 'Physique', icon: 'fas fa-atom', color: '#60a5fa',
+    id: 'phys', name: 'Physique', icon: 'fas fa-atom', color: '#ffb0c0',
     chapters: [
       { title: 'Ondes', lessons: [
         { name: 'Ondes mécaniques progressives', sub: 'Définition, célérité, retard temporel' },
@@ -839,7 +894,7 @@ const LESSONS_DATA = [
     ]
   },
   {
-    id: 'chem', name: 'Chimie', icon: 'fas fa-dna', color: '#a78bfa',
+    id: 'chem', name: 'Chimie', icon: 'fas fa-dna', color: '#e090b0',
     chapters: [
       { title: 'Cinétique et équilibre', lessons: [
         { name: 'Réactions rapides et lentes', sub: 'Facteurs cinétiques' },
@@ -856,7 +911,7 @@ const LESSONS_DATA = [
     ]
   },
   {
-    id: 'math', name: 'Mathématiques', icon: 'fas fa-square-root-variable', color: '#f472b6',
+    id: 'math', name: 'Mathématiques', icon: 'fas fa-square-root-variable', color: '#ffa0b0',
     chapters: [
       { title: 'Analyse', lessons: [
         { name: 'Continuité', sub: 'TVI, fonctions réciproques' },
@@ -875,7 +930,7 @@ const LESSONS_DATA = [
     ]
   },
   {
-    id: 'svt', name: 'SVT', icon: 'fas fa-leaf', color: '#34d399',
+    id: 'svt', name: 'SVT', icon: 'fas fa-leaf', color: '#d0a0b0',
     chapters: [
       { title: 'Unités du programme', lessons: [
         { name: 'Énergie cellulaire', sub: 'Respiration, fermentation, ATP' },
@@ -935,7 +990,7 @@ function updateLessonUI(key, status) {
   if (lessonName) {
     if (status === 'done') {
       lessonName.style.textDecoration = 'line-through';
-      lessonName.style.color = '#64748b';
+      lessonName.style.color = '#b090a0';
     } else {
       lessonName.style.textDecoration = 'none';
       lessonName.style.color = '';
@@ -1050,7 +1105,7 @@ function renderLessons() {
     const card = document.createElement('div');
     card.className = 'subject-card';
     const progress = getSubjectProgress(subject.id);
-    const isOpen = openSubjects[subject.id] === true;  // <-- التعديل الوحيد: مغلقة افتراضياً
+    const isOpen = openSubjects[subject.id] === true;  // مغلقة افتراضياً
     
     card.innerHTML = `
       <div class="subject-header" data-subj="${subject.id}">
@@ -1076,7 +1131,7 @@ function renderLessons() {
                 <div class="lesson-item" data-key="${key}">
                   <div class="lesson-header">
                     <div class="lesson-content">
-                      <div class="lesson-name" style="${status === 'done' ? 'text-decoration: line-through; color: #64748b;' : ''}">${lesson.name}</div>
+                      <div class="lesson-name" style="${status === 'done' ? 'text-decoration: line-through; color: #b090a0;' : ''}">${lesson.name}</div>
                       <div class="lesson-sub">${lesson.sub}</div>
                     </div>
                     <div class="lesson-actions">
@@ -1178,7 +1233,7 @@ function renderStats() {
     barItem.className = 'bar-item';
     barItem.innerHTML = `
       <div class="bar" style="height: ${progress * 1.5}px; background: linear-gradient(180deg, ${subject.color}, ${subject.color}dd)"></div>
-      <div style="font-size: 0.7rem; color: #94a3b8">${subject.name}</div>
+      <div style="font-size: 0.7rem; color: #e0b0c0">${subject.name}</div>
       <div style="font-weight: 700; font-size: 0.8rem; color: ${subject.color}">${progress}%</div>
     `;
     chart.appendChild(barItem);
@@ -1189,7 +1244,7 @@ function renderTodoList() {
   const container = document.getElementById('todoList');
   const todos = getTodos();
   if (todos.length === 0) {
-    container.innerHTML = '<div class="empty-todo"><i class="fas fa-check-circle"></i> Aucune tâche pour le moment<br>Ajoutez-en une ci-dessus</div>';
+    container.innerHTML = '<div class="empty-todo"><i class="fas fa-heart"></i> Aucune tâche pour le moment<br>Ajoutez-en une ci-dessus <i class="fas fa-heart"></i></div>';
     return;
   }
   container.innerHTML = todos.map(todo => `
