@@ -13,11 +13,12 @@
   box-sizing: border-box;
 }
 
+/* خلفية بتدرج وردي وبنفسجي ناعم */
 body {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(145deg, #2d1b2e 0%, #4a2c3f 40%, #6b3a4a 70%, #8b4a5c 100%);
+  background: linear-gradient(145deg, #2a1b2e 0%, #3e2a4a 30%, #5e3a6e 60%, #7e4a8e 100%);
   background-attachment: fixed;
-  color: #fce4ec;
+  color: #f8e8ff;
   min-height: 100vh;
   padding-bottom: 40px;
   -webkit-touch-callout: none;
@@ -27,6 +28,7 @@ body {
   overflow-x: hidden;
 }
 
+/* قلوب متحركة */
 body::before {
   content: '❤️ 💕 💗 💖 💘 💝';
   position: fixed;
@@ -35,7 +37,7 @@ body::before {
   width: 100%;
   height: 100%;
   font-size: 24px;
-  color: rgba(255, 200, 220, 0.08);
+  color: rgba(255, 200, 240, 0.08);
   white-space: pre-wrap;
   word-break: break-all;
   pointer-events: none;
@@ -63,9 +65,9 @@ input, textarea, [contenteditable="true"] {
 }
 
 .glass {
-  background: rgba(60, 30, 45, 0.5);
+  background: rgba(70, 30, 70, 0.5);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 180, 200, 0.25);
+  border: 1px solid rgba(220, 160, 240, 0.25);
 }
 
 .container {
@@ -76,17 +78,18 @@ input, textarea, [contenteditable="true"] {
   z-index: 2;
 }
 
+/* الهيدر */
 .header {
   text-align: center;
   margin-bottom: 32px;
   padding: 32px 20px;
-  background: linear-gradient(135deg, rgba(90, 40, 60, 0.7) 0%, rgba(130, 60, 80, 0.6) 100%);
+  background: linear-gradient(135deg, rgba(100, 40, 100, 0.7) 0%, rgba(140, 60, 130, 0.6) 100%);
   backdrop-filter: blur(8px);
   border-radius: 28px;
-  border: 1px solid rgba(255, 180, 200, 0.4);
+  border: 1px solid rgba(220, 160, 240, 0.4);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 200, 220, 0.1) inset;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(230, 180, 250, 0.1) inset;
 }
 
 .header::before {
@@ -96,35 +99,36 @@ input, textarea, [contenteditable="true"] {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #ff9a9e, #fecfef, #ffb7c5);
+  background: linear-gradient(90deg, #f9a8d4, #c084fc, #a78bfa);
 }
 
 .header h1 {
   font-size: 2.2rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #ffeef2, #ffd6e0);
+  background: linear-gradient(135deg, #ffe0f0, #e9c4ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 8px;
-  text-shadow: 0 2px 10px rgba(255, 120, 160, 0.3);
+  text-shadow: 0 2px 10px rgba(200, 120, 220, 0.3);
 }
 
 .header p {
-  color: #f8d5e0;
+  color: #ebc6ff;
   font-size: 0.9rem;
   font-style: italic;
 }
 
+/* أزرار التبويب */
 .tabs {
   display: flex;
   gap: 12px;
-  background: rgba(50, 25, 40, 0.7);
+  background: rgba(60, 25, 60, 0.7);
   backdrop-filter: blur(16px);
   padding: 8px;
   border-radius: 60px;
   margin-bottom: 28px;
-  border: 1px solid rgba(255, 160, 190, 0.4);
+  border: 1px solid rgba(210, 150, 240, 0.4);
 }
 
 .tab {
@@ -133,7 +137,7 @@ input, textarea, [contenteditable="true"] {
   text-align: center;
   font-weight: 600;
   font-size: 0.9rem;
-  color: #f0c0d0;
+  color: #e0b0f0;
   cursor: pointer;
   border-radius: 50px;
   transition: all 0.3s ease;
@@ -151,16 +155,17 @@ input, textarea, [contenteditable="true"] {
 }
 
 .tab:hover {
-  color: #ffeef2;
-  background: rgba(255, 140, 180, 0.2);
+  color: #f5e0ff;
+  background: rgba(200, 120, 220, 0.2);
 }
 
 .tab.active {
-  background: linear-gradient(135deg, #ff8a9e, #e57399);
+  background: linear-gradient(135deg, #e879f9, #c084fc);
   color: white;
-  box-shadow: 0 4px 12px rgba(230, 100, 140, 0.4);
+  box-shadow: 0 4px 12px rgba(180, 100, 220, 0.4);
 }
 
+/* الصفحات */
 .page {
   display: none;
   animation: fadeIn 0.4s ease;
@@ -175,13 +180,14 @@ input, textarea, [contenteditable="true"] {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* بطاقة التقدم */
 .progress-card {
-  background: linear-gradient(135deg, rgba(70, 35, 50, 0.7), rgba(90, 45, 60, 0.6));
+  background: linear-gradient(135deg, rgba(80, 35, 80, 0.7), rgba(110, 45, 100, 0.6));
   backdrop-filter: blur(8px);
   border-radius: 24px;
   padding: 24px;
   margin-bottom: 24px;
-  border: 1px solid rgba(255, 160, 190, 0.3);
+  border: 1px solid rgba(210, 150, 240, 0.3);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
@@ -196,7 +202,7 @@ input, textarea, [contenteditable="true"] {
 
 .progress-title {
   font-weight: 600;
-  color: #f8d5e0;
+  color: #e8c4ff;
   letter-spacing: 1px;
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -205,14 +211,14 @@ input, textarea, [contenteditable="true"] {
 .progress-percent {
   font-size: 2rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #ffb7c5, #ff8aae);
+  background: linear-gradient(135deg, #f9a8d4, #c084fc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .bar-container {
-  background: rgba(80, 40, 55, 0.5);
+  background: rgba(90, 40, 90, 0.5);
   border-radius: 99px;
   height: 10px;
   overflow: hidden;
@@ -221,12 +227,12 @@ input, textarea, [contenteditable="true"] {
 
 .bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #ff9a9e, #ffb7c5, #ff8aae);
+  background: linear-gradient(90deg, #f9a8d4, #c084fc, #a78bfa);
   border-radius: 99px;
   transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 10px #ff8aae88;
+  box-shadow: 0 0 10px #c084fc88;
 }
 
 .bar-fill::after {
@@ -245,6 +251,7 @@ input, textarea, [contenteditable="true"] {
   100% { transform: translateX(100%); }
 }
 
+/* شبكة الإحصائيات */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -253,39 +260,40 @@ input, textarea, [contenteditable="true"] {
 }
 
 .stat-card {
-  background: rgba(70, 35, 50, 0.6);
+  background: rgba(80, 35, 80, 0.6);
   backdrop-filter: blur(8px);
   border-radius: 20px;
   padding: 20px;
   text-align: center;
-  border: 1px solid rgba(255, 160, 190, 0.3);
+  border: 1px solid rgba(210, 150, 240, 0.3);
   transition: all 0.3s ease;
 }
 
 .stat-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 140, 180, 0.6);
+  border-color: rgba(200, 140, 230, 0.6);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .stat-icon {
   font-size: 2rem;
   margin-bottom: 12px;
-  color: #ffb7c5;
+  color: #d8a8f0;
 }
 
 .stat-number {
   font-size: 2rem;
   font-weight: 800;
-  color: #fce4ec;
+  color: #f8e8ff;
 }
 
 .stat-label {
-  color: #e0b0c0;
+  color: #c9a0e0;
   font-size: 0.75rem;
   margin-top: 4px;
 }
 
+/* بطاقات المواد */
 .subjects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -294,23 +302,23 @@ input, textarea, [contenteditable="true"] {
 }
 
 .subject-card {
-  background: rgba(60, 30, 45, 0.6);
+  background: rgba(70, 30, 70, 0.6);
   backdrop-filter: blur(8px);
   border-radius: 20px;
-  border: 1px solid rgba(255, 160, 190, 0.3);
+  border: 1px solid rgba(210, 150, 240, 0.3);
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
 .subject-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 140, 180, 0.5);
+  border-color: rgba(200, 140, 230, 0.5);
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
 .subject-header {
   padding: 20px;
-  border-bottom: 1px solid rgba(255, 160, 190, 0.2);
+  border-bottom: 1px solid rgba(210, 150, 240, 0.2);
   display: flex;
   align-items: center;
   gap: 14px;
@@ -319,7 +327,7 @@ input, textarea, [contenteditable="true"] {
 }
 
 .subject-header:hover {
-  background: rgba(255, 140, 180, 0.1);
+  background: rgba(200, 120, 220, 0.1);
 }
 
 .subject-icon {
@@ -332,10 +340,10 @@ input, textarea, [contenteditable="true"] {
   font-size: 1.5rem;
 }
 
-.subject-icon.phys { background: rgba(255, 160, 180, 0.2); color: #ffb0c0; }
-.subject-icon.chem { background: rgba(230, 140, 170, 0.2); color: #e090b0; }
-.subject-icon.math { background: rgba(255, 140, 160, 0.2); color: #ffa0b0; }
-.subject-icon.svt { background: rgba(210, 130, 160, 0.2); color: #d0a0b0; }
+.subject-icon.phys { background: rgba(230, 150, 220, 0.2); color: #e2a0e0; }
+.subject-icon.chem { background: rgba(210, 130, 210, 0.2); color: #d090d0; }
+.subject-icon.math { background: rgba(240, 140, 200, 0.2); color: #f0a0d0; }
+.subject-icon.svt { background: rgba(200, 120, 200, 0.2); color: #c890d0; }
 
 .subject-info {
   flex: 1;
@@ -345,12 +353,12 @@ input, textarea, [contenteditable="true"] {
   font-weight: 700;
   font-size: 1.1rem;
   margin-bottom: 4px;
-  color: #ffe0e8;
+  color: #f0d0ff;
 }
 
 .subject-sub {
   font-size: 0.7rem;
-  color: #e0b0c0;
+  color: #d0a8e0;
 }
 
 .subject-progress {
@@ -358,13 +366,13 @@ input, textarea, [contenteditable="true"] {
   font-size: 0.9rem;
 }
 
-.subject-progress.phys { color: #ffb0c0; }
-.subject-progress.chem { color: #e090b0; }
-.subject-progress.math { color: #ffa0b0; }
-.subject-progress.svt { color: #d0a0b0; }
+.subject-progress.phys { color: #e2a0e0; }
+.subject-progress.chem { color: #d090d0; }
+.subject-progress.math { color: #f0a0d0; }
+.subject-progress.svt { color: #c890d0; }
 
 .chevron {
-  color: #d0a0b0;
+  color: #c890d0;
   transition: transform 0.3s;
 }
 
@@ -381,6 +389,7 @@ input, textarea, [contenteditable="true"] {
   display: block;
 }
 
+/* الدروس */
 .chapter {
   margin-top: 16px;
 }
@@ -388,7 +397,7 @@ input, textarea, [contenteditable="true"] {
 .chapter-title {
   font-weight: 600;
   font-size: 0.75rem;
-  color: #f0c0d0;
+  color: #e0b8f0;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 12px;
@@ -396,7 +405,7 @@ input, textarea, [contenteditable="true"] {
 }
 
 .lesson-item {
-  background: rgba(80, 40, 55, 0.4);
+  background: rgba(90, 40, 90, 0.4);
   border-radius: 12px;
   padding: 12px;
   margin-bottom: 8px;
@@ -405,8 +414,8 @@ input, textarea, [contenteditable="true"] {
 }
 
 .lesson-item:hover {
-  background: rgba(255, 140, 180, 0.15);
-  border-color: rgba(255, 180, 200, 0.2);
+  background: rgba(200, 120, 220, 0.15);
+  border-color: rgba(220, 170, 240, 0.2);
 }
 
 .lesson-header {
@@ -423,12 +432,12 @@ input, textarea, [contenteditable="true"] {
   font-weight: 500;
   font-size: 0.85rem;
   margin-bottom: 4px;
-  color: #ffe0e8;
+  color: #f0d0ff;
 }
 
 .lesson-sub {
   font-size: 0.7rem;
-  color: #d0a0b0;
+  color: #c8a0d8;
 }
 
 .lesson-actions {
@@ -437,15 +446,16 @@ input, textarea, [contenteditable="true"] {
   align-items: center;
 }
 
+/* أزرار الحالة */
 .status-btn {
   width: 32px;
   height: 32px;
   border-radius: 10px;
-  border: 1.5px solid rgba(255, 160, 190, 0.5);
+  border: 1.5px solid rgba(210, 150, 240, 0.5);
   background: transparent;
   cursor: pointer;
   transition: all 0.2s;
-  color: #d0a0b0;
+  color: #c890d0;
   font-size: 0.8rem;
 }
 
@@ -454,27 +464,27 @@ input, textarea, [contenteditable="true"] {
 }
 
 .status-btn.done {
-  background: rgba(255, 140, 180, 0.25);
-  border-color: #ff8aae;
-  color: #ffb0c0;
+  background: rgba(200, 130, 220, 0.3);
+  border-color: #c084fc;
+  color: #dbb5ff;
 }
 
 .status-btn.partial {
-  background: rgba(255, 180, 150, 0.2);
-  border-color: #f0a080;
-  color: #f5c0a0;
+  background: rgba(220, 160, 200, 0.2);
+  border-color: #e0a0c0;
+  color: #f0c0d0;
 }
 
 .lesson-name[style*="line-through"] {
-  color: #d0a0b0 !important;
+  color: #c0a0d0 !important;
 }
 
 .note-input {
-  background: rgba(60, 30, 45, 0.7);
-  border: 1px solid rgba(255, 160, 190, 0.4);
+  background: rgba(70, 30, 70, 0.7);
+  border: 1px solid rgba(210, 150, 240, 0.4);
   border-radius: 8px;
   padding: 6px 10px;
-  color: #f0d0e0;
+  color: #e8c8f0;
   font-size: 0.7rem;
   width: 90px;
   font-family: inherit;
@@ -482,15 +492,16 @@ input, textarea, [contenteditable="true"] {
 
 .note-input:focus {
   outline: none;
-  border-color: #ff90a0;
+  border-color: #c084fc;
 }
 
+/* قسم المهام */
 .todo-section {
-  background: rgba(60, 30, 45, 0.6);
+  background: rgba(70, 30, 70, 0.6);
   backdrop-filter: blur(8px);
   border-radius: 24px;
   padding: 24px;
-  border: 1px solid rgba(255, 160, 190, 0.3);
+  border: 1px solid rgba(210, 150, 240, 0.3);
 }
 
 .todo-header {
@@ -505,18 +516,18 @@ input, textarea, [contenteditable="true"] {
 .todo-title h3 {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #ffe0e8;
+  color: #f0d0ff;
 }
 
 .todo-title p {
   font-size: 0.7rem;
-  color: #e0b0c0;
+  color: #d0a8e0;
 }
 
 .add-todo {
   display: flex;
   gap: 12px;
-  background: rgba(80, 40, 55, 0.6);
+  background: rgba(90, 40, 90, 0.6);
   padding: 4px;
   border-radius: 60px;
 }
@@ -525,14 +536,14 @@ input, textarea, [contenteditable="true"] {
   background: transparent;
   border: none;
   padding: 10px 16px;
-  color: #f0d0e0;
+  color: #e8c8f0;
   font-family: inherit;
   font-size: 16px;
   width: 240px;
 }
 
 .add-todo input::placeholder {
-  color: #c0a0b0;
+  color: #b890c8;
 }
 
 .add-todo input:focus {
@@ -540,7 +551,7 @@ input, textarea, [contenteditable="true"] {
 }
 
 .add-todo button {
-  background: linear-gradient(135deg, #ff9a9e, #e57399);
+  background: linear-gradient(135deg, #e879f9, #c084fc);
   border: none;
   padding: 10px 24px;
   border-radius: 50px;
@@ -549,7 +560,7 @@ input, textarea, [contenteditable="true"] {
   cursor: pointer;
   transition: all 0.2s;
   font-size: 0.9rem;
-  box-shadow: 0 4px 10px rgba(200, 80, 120, 0.3);
+  box-shadow: 0 4px 10px rgba(160, 80, 180, 0.3);
 }
 
 .add-todo button:hover {
@@ -566,21 +577,21 @@ input, textarea, [contenteditable="true"] {
   align-items: center;
   gap: 12px;
   padding: 12px;
-  background: rgba(80, 40, 55, 0.4);
+  background: rgba(90, 40, 90, 0.4);
   border-radius: 12px;
   margin-bottom: 8px;
   transition: all 0.2s;
 }
 
 .todo-item:hover {
-  background: rgba(255, 140, 180, 0.15);
+  background: rgba(200, 120, 220, 0.15);
 }
 
 .todo-check {
   width: 24px;
   height: 24px;
   border-radius: 8px;
-  border: 2px solid rgba(255, 160, 190, 0.6);
+  border: 2px solid rgba(210, 150, 240, 0.6);
   background: transparent;
   cursor: pointer;
   display: flex;
@@ -591,26 +602,26 @@ input, textarea, [contenteditable="true"] {
 }
 
 .todo-check.completed {
-  background: rgba(200, 120, 150, 0.3);
-  border-color: #e090a0;
-  color: #f8d0e0;
+  background: rgba(180, 120, 200, 0.3);
+  border-color: #c084fc;
+  color: #dbb5ff;
 }
 
 .todo-text {
   flex: 1;
   font-size: 0.85rem;
-  color: #f0d0e0;
+  color: #e8c8f0;
 }
 
 .todo-text.completed {
   text-decoration: line-through;
-  color: #b090a0;
+  color: #b898c8;
 }
 
 .todo-delete {
   background: transparent;
   border: none;
-  color: #c090a0;
+  color: #c090c0;
   cursor: pointer;
   padding: 6px;
   border-radius: 6px;
@@ -618,22 +629,23 @@ input, textarea, [contenteditable="true"] {
 }
 
 .todo-delete:hover {
-  color: #ffb0c0;
-  background: rgba(200, 100, 130, 0.2);
+  color: #e0b0f0;
+  background: rgba(180, 100, 200, 0.2);
 }
 
 .empty-todo {
   text-align: center;
   padding: 48px;
-  color: #c0a0b0;
+  color: #c0a0d0;
 }
 
+/* صفحة الإحصائيات */
 .stats-container {
-  background: rgba(60, 30, 45, 0.6);
+  background: rgba(70, 30, 70, 0.6);
   backdrop-filter: blur(8px);
   border-radius: 24px;
   padding: 24px;
-  border: 1px solid rgba(255, 160, 190, 0.3);
+  border: 1px solid rgba(210, 150, 240, 0.3);
 }
 
 .chart-container {
@@ -642,7 +654,7 @@ input, textarea, [contenteditable="true"] {
 
 .chart-title {
   font-weight: 600;
-  color: #f0c0d0;
+  color: #e0b8f0;
   margin-bottom: 16px;
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -666,12 +678,12 @@ input, textarea, [contenteditable="true"] {
 
 .bar {
   width: 100%;
-  background: linear-gradient(180deg, #ff9a9e, #e57399);
+  background: linear-gradient(180deg, #e879f9, #c084fc);
   border-radius: 8px 8px 4px 4px;
   transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 10px #e5739988;
+  box-shadow: 0 0 10px #c084fc88;
 }
 
 .bar::after {
@@ -684,6 +696,7 @@ input, textarea, [contenteditable="true"] {
   background: linear-gradient(180deg, rgba(255,255,255,0.2), transparent);
 }
 
+/* تجاوب */
 @media (max-width: 768px) {
   .container {
     padding: 16px;
@@ -717,22 +730,23 @@ input, textarea, [contenteditable="true"] {
   }
 }
 
+/* شريط التمرير */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #4a2c3f;
+  background: #3e2a4a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #b08090;
+  background: #a070b0;
   border-radius: 99px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #e090a0;
+  background: #c084fc;
 }
 </style>
 </head>
@@ -854,10 +868,10 @@ document.addEventListener('contextmenu', function(e) {
   return false;
 });
 
-// Données des cours (inchangées)
+// Données des cours
 const LESSONS_DATA = [
   {
-    id: 'phys', name: 'Physique', icon: 'fas fa-atom', color: '#ffb0c0',
+    id: 'phys', name: 'Physique', icon: 'fas fa-atom', color: '#e2a0e0',
     chapters: [
       { title: 'Ondes', lessons: [
         { name: 'Ondes mécaniques progressives', sub: 'Définition, célérité, retard temporel' },
@@ -882,7 +896,7 @@ const LESSONS_DATA = [
     ]
   },
   {
-    id: 'chem', name: 'Chimie', icon: 'fas fa-dna', color: '#e090b0',
+    id: 'chem', name: 'Chimie', icon: 'fas fa-dna', color: '#d090d0',
     chapters: [
       { title: 'Cinétique et équilibre', lessons: [
         { name: 'Réactions rapides et lentes', sub: 'Facteurs cinétiques' },
@@ -899,7 +913,7 @@ const LESSONS_DATA = [
     ]
   },
   {
-    id: 'math', name: 'Mathématiques', icon: 'fas fa-square-root-variable', color: '#ffa0b0',
+    id: 'math', name: 'Mathématiques', icon: 'fas fa-square-root-variable', color: '#f0a0d0',
     chapters: [
       { title: 'Analyse', lessons: [
         { name: 'Continuité', sub: 'TVI, fonctions réciproques' },
@@ -918,7 +932,7 @@ const LESSONS_DATA = [
     ]
   },
   {
-    id: 'svt', name: 'SVT', icon: 'fas fa-leaf', color: '#d0a0b0',
+    id: 'svt', name: 'SVT', icon: 'fas fa-leaf', color: '#c890d0',
     chapters: [
       { title: 'Unités du programme', lessons: [
         { name: 'Énergie cellulaire', sub: 'Respiration, fermentation, ATP' },
@@ -977,7 +991,7 @@ function updateLessonUI(key, status) {
   if (lessonName) {
     if (status === 'done') {
       lessonName.style.textDecoration = 'line-through';
-      lessonName.style.color = '#d0a0b0';
+      lessonName.style.color = '#c0a0d0';
     } else {
       lessonName.style.textDecoration = 'none';
       lessonName.style.color = '';
@@ -1089,7 +1103,7 @@ function renderLessons() {
     const card = document.createElement('div');
     card.className = 'subject-card';
     const progress = getSubjectProgress(subject.id);
-    const isOpen = openSubjects[subject.id] === true;  // مغلقة افتراضياً
+    const isOpen = openSubjects[subject.id] === true;
     
     card.innerHTML = `
       <div class="subject-header" data-subj="${subject.id}">
@@ -1115,7 +1129,7 @@ function renderLessons() {
                 <div class="lesson-item" data-key="${key}">
                   <div class="lesson-header">
                     <div class="lesson-content">
-                      <div class="lesson-name" style="${status === 'done' ? 'text-decoration: line-through; color: #d0a0b0;' : ''}">${lesson.name}</div>
+                      <div class="lesson-name" style="${status === 'done' ? 'text-decoration: line-through; color: #c0a0d0;' : ''}">${lesson.name}</div>
                       <div class="lesson-sub">${lesson.sub}</div>
                     </div>
                     <div class="lesson-actions">
@@ -1215,7 +1229,7 @@ function renderStats() {
     barItem.className = 'bar-item';
     barItem.innerHTML = `
       <div class="bar" style="height: ${progress * 1.5}px; background: linear-gradient(180deg, ${subject.color}, ${subject.color}dd)"></div>
-      <div style="font-size: 0.7rem; color: #e0b0c0">${subject.name}</div>
+      <div style="font-size: 0.7rem; color: #c9a0e0">${subject.name}</div>
       <div style="font-weight: 700; font-size: 0.8rem; color: ${subject.color}">${progress}%</div>
     `;
     chart.appendChild(barItem);
